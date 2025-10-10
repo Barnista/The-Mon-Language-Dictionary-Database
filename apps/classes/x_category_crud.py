@@ -1,7 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 
-class CategoryCRUD:
+class XCategoryCRUD:
     def __init__(self, host, user, password, database):
         self.host = host
         self.user = user
@@ -26,10 +26,10 @@ class CategoryCRUD:
         if self.conn:
             self.conn.close()
 
-    def create_word(self, parent_category_id, en_category_name, mm_category_name, mon_category_name, description,):
-        sql = '''INSERT INTO Word (parent_category_id, en_category_name, mm_category_name, mon_category_name, description, created_at)
-                 VALUES (%s, %s, %s, %s, %s, NOW())'''
-        vals = (parent_category_id, en_category_name, mm_category_name, mon_category_name, description)
+    def create_with_id(self, category_id, parent_category_id, name, author_id,):
+        sql = '''INSERT INTO Category (id, parent_category_id, name, author_id, created_at)
+                 VALUES (%s, %s, %s, %s, NOW())'''
+        vals = (category_id, parent_category_id, name, author_id)
         try:
             cursor = self.conn.cursor()
             cursor.execute(sql, vals)
@@ -38,34 +38,50 @@ class CategoryCRUD:
         except Error as e:
             print(f"Error creating word: {e}")
             return None
-        finally:
-            cursor.close()
+        #finally:
+        #    cursor.close()
 
-    def read_all_word(self):
-        sql = 'SELECT * FROM Word ORDER BY word ASC'
+    def create(self, parent_category_id, name, author_id,):
+        sql = '''INSERT INTO Category (parent_category_id, name, author_id, created_at)
+                 VALUES (%s, %s, %s, NOW())'''
+        vals = (parent_category_id, name, author_id)
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(sql, vals)
+            self.conn.commit()
+            return cursor.lastrowid
+        except Error as e:
+            print(f"Error creating word: {e}")
+            return None
+        #finally:
+        #    cursor.close()
+
+    def read_all(self):
+        sql = '''SELECT * FROM Category'''
         try:
             cursor = self.conn.cursor(dictionary=True)
             cursor.execute(sql)
-            return cursor.fetchone()
+            return cursor.fetchall()
         except Error as e:
             print(f"Error reading word: {e}")
             return None
-        finally:
-            cursor.close()
+        #finally:
+        #    cursor.close()
 
-    def read_word(self, category_id):
-        sql = 'SELECT * FROM Word WHERE category_id = %s'
+    def read_one(self, category_id):
+        sql = '''SELECT * FROM Category WHERE category_id = %s'''
+        vals = (category_id)
         try:
             cursor = self.conn.cursor(dictionary=True)
-            cursor.execute(sql, (category_id,))
+            cursor.execute(sql, vals)
             return cursor.fetchone()
         except Error as e:
             print(f"Error reading word: {e}")
             return None
-        finally:
-            cursor.close()
+        #finally:
+        #    cursor.close()
 
-    def update_word(self, category_id, **kwargs):
+    def update_one(self, category_id, **kwargs):
         fields = []
         values = []
         for key, value in kwargs.items():
@@ -74,7 +90,7 @@ class CategoryCRUD:
         if not fields:
             print("No fields to update.")
             return False
-        sql = f"UPDATE Word SET {', '.join(fields)} WHERE category_id = %s"
+        sql = f"UPDATE Category SET {', '.join(fields)} WHERE category_id = %s"
         values.append(category_id)
         try:
             cursor = self.conn.cursor()
@@ -84,18 +100,19 @@ class CategoryCRUD:
         except Error as e:
             print(f"Error updating word: {e}")
             return False
-        finally:
-            cursor.close()
+        #finally:
+        #    cursor.close()
 
-    def delete_word(self, category_id):
-        sql = 'DELETE FROM Word WHERE category_id = %s'
+    def delete_one(self, category_id):
+        sql = '''DELETE FROM Category WHERE category_id = %s'''
+        vals = (category_id)
         try:
             cursor = self.conn.cursor()
-            cursor.execute(sql, (category_id,))
+            cursor.execute(sql, vals)
             self.conn.commit()
             return cursor.rowcount > 0
         except Error as e:
             print(f"Error deleting word: {e}")
             return False
-        finally:
-            cursor.close()
+        #finally:
+        #    cursor.close()

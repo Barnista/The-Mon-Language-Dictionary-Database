@@ -1,7 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 
-class WordCRUDNew:
+class DefinitionCRUD:
     def __init__(self, host, user, password, database):
         self.host = host
         self.user = user
@@ -26,10 +26,10 @@ class WordCRUDNew:
         if self.conn:
             self.conn.close()
 
-    def create_word(self, word, ipa, th, lang_code, author_id, synonym_word_id=None):
-        sql = '''INSERT INTO Word (word, ipa, th, lang_code, created_at, author_id, synonym_word_id)
-                 VALUES (%s, %s, %s, %s, NOW(), %s, %s)'''
-        vals = (word, ipa, th, lang_code, author_id, synonym_word_id)
+    def create(self, word_id, language_id, pos_id, definition, example, category_id=None):
+        sql = '''INSERT INTO Definition (word_id, language_id, pos_id, definition, example, created_at, category_id)
+                 VALUES (%s, %s, %s, %s, %s, NOW(), %s)'''
+        vals = (word_id, language_id, pos_id, definition, example, category_id)
         try:
             cursor = self.conn.cursor()
             cursor.execute(sql, vals)
@@ -38,22 +38,34 @@ class WordCRUDNew:
         except Error as e:
             print(f"Error creating word: {e}")
             return None
-        finally:
-            cursor.close()
+        #finally:
+        #    cursor.close()
 
-    def read_word(self, word_id):
-        sql = 'SELECT * FROM Word WHERE id = %s'
+    def read_all(self):
+        sql = 'SELECT * FROM Definition'
         try:
             cursor = self.conn.cursor(dictionary=True)
-            cursor.execute(sql, (word_id,))
+            cursor.execute(sql)
+            return cursor.fetchall()
+        except Error as e:
+            print(f"Error reading word: {e}")
+            return None
+        #finally:
+        #    cursor.close()
+
+    def read_one(self, definition_id):
+        sql = 'SELECT * FROM Definition WHERE definition_id = %s'
+        try:
+            cursor = self.conn.cursor(dictionary=True)
+            cursor.execute(sql, (definition_id,))
             return cursor.fetchone()
         except Error as e:
             print(f"Error reading word: {e}")
             return None
-        finally:
-            cursor.close()
+        #finally:
+        #    cursor.close()
 
-    def update_word(self, word_id, **kwargs):
+    def update_one(self, definition_id, **kwargs):
         fields = []
         values = []
         for key, value in kwargs.items():
@@ -62,8 +74,8 @@ class WordCRUDNew:
         if not fields:
             print("No fields to update.")
             return False
-        sql = f"UPDATE Word SET {', '.join(fields)} WHERE id = %s"
-        values.append(word_id)
+        sql = f"UPDATE Definition SET {', '.join(fields)} WHERE definition_id = %s"
+        values.append(definition_id)
         try:
             cursor = self.conn.cursor()
             cursor.execute(sql, tuple(values))
@@ -72,18 +84,18 @@ class WordCRUDNew:
         except Error as e:
             print(f"Error updating word: {e}")
             return False
-        finally:
-            cursor.close()
+        #finally:
+        #    cursor.close()
 
-    def delete_word(self, word_id):
-        sql = 'DELETE FROM Word WHERE id = %s'
+    def delete_one(self, definition_id):
+        sql = 'DELETE FROM Definition WHERE definition_id = %s'
         try:
             cursor = self.conn.cursor()
-            cursor.execute(sql, (word_id,))
+            cursor.execute(sql, (definition_id,))
             self.conn.commit()
             return cursor.rowcount > 0
         except Error as e:
             print(f"Error deleting word: {e}")
             return False
-        finally:
-            cursor.close()
+        #finally:
+        #    cursor.close()

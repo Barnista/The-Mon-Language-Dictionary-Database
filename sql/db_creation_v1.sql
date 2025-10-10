@@ -38,11 +38,12 @@ CREATE TABLE CategoryDetail (
     id INT AUTO_INCREMENT PRIMARY KEY,
     category_id INT NOT NULL,
     label VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
+    description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     author_id INT NULL,
     FOREIGN KEY (category_id) REFERENCES Category(id),
-    FOREIGN KEY (author_id) REFERENCES Author(id)
+    FOREIGN KEY (author_id) REFERENCES Author(id),
+    lang_code VARCHAR(3),
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Table: Definition
@@ -53,7 +54,7 @@ CREATE TABLE Definition (
     pos_code VARCHAR(10) NOT NULL,
     category_id INT NULL,
     definition TEXT NOT NULL,
-    example TEXT NOT NULL,
+    example TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     author_id INT NULL,
     FOREIGN KEY (word_id) REFERENCES Word(id),

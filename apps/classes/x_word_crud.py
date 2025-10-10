@@ -1,7 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 
-class SynonymCRUD:
+class XWordCRUD:
     def __init__(self, host, user, password, database):
         self.host = host
         self.user = user
@@ -26,10 +26,25 @@ class SynonymCRUD:
         if self.conn:
             self.conn.close()
 
-    def create_word(self, word_id, language_id, synonym):
-        sql = '''INSERT INTO Word (word_id, language_id, synonym, created_at)
-                 VALUES (%s, %s, %s, NOW())'''
-        vals = (word_id, language_id, synonym)
+    def create_with_id(self, id, word, ipa, th, lang_code, author_id, synonym_word_id=None):
+        sql = '''INSERT INTO Word (id, word, ipa, th, lang_code, author_id, synonym_word_id, created_at)
+                 VALUES (%s, %s, %s, %s, %s, %s, %s, NOW())'''
+        vals = (id, word, ipa, th, lang_code, author_id, synonym_word_id)
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(sql, vals)
+            self.conn.commit()
+            return cursor.lastrowid
+        except Error as e:
+            print(f"Error creating word: {e}")
+            return None
+        #finally:
+        #    cursor.close()
+
+    def create(self, word, ipa, th, lang_code, author_id, synonym_word_id=None):
+        sql = '''INSERT INTO Word (word, ipa, th, lang_code, created_at, author_id, synonym_word_id)
+                 VALUES (%s, %s, %s, %s, NOW(), %s, %s)'''
+        vals = (word, ipa, th, lang_code, author_id, synonym_word_id)
         try:
             cursor = self.conn.cursor()
             cursor.execute(sql, vals)
@@ -41,23 +56,23 @@ class SynonymCRUD:
         finally:
             cursor.close()
 
-    def read_all_word(self):
+    def read_all(self):
         sql = 'SELECT * FROM Word ORDER BY word ASC'
         try:
             cursor = self.conn.cursor(dictionary=True)
             cursor.execute(sql)
-            return cursor.fetchone()
+            return cursor.fetchall()
         except Error as e:
             print(f"Error reading word: {e}")
             return None
-        finally:
-            cursor.close()
+        #finally:
+        #    cursor.close()
 
-    def read_word(self, synonym_id):
-        sql = 'SELECT * FROM Word WHERE synonym_id = %s'
+    def read_one(self, word_id):
+        sql = 'SELECT * FROM Word WHERE id = %s'
         try:
             cursor = self.conn.cursor(dictionary=True)
-            cursor.execute(sql, (synonym_id,))
+            cursor.execute(sql, (word_id,))
             return cursor.fetchone()
         except Error as e:
             print(f"Error reading word: {e}")
@@ -65,7 +80,7 @@ class SynonymCRUD:
         finally:
             cursor.close()
 
-    def update_word(self, synonym_id, **kwargs):
+    def update_one(self, word_id, **kwargs):
         fields = []
         values = []
         for key, value in kwargs.items():
@@ -74,8 +89,8 @@ class SynonymCRUD:
         if not fields:
             print("No fields to update.")
             return False
-        sql = f"UPDATE Word SET {', '.join(fields)} WHERE synonym_id = %s"
-        values.append(synonym_id)
+        sql = f"UPDATE Word SET {', '.join(fields)} WHERE id = %s"
+        values.append(word_id)
         try:
             cursor = self.conn.cursor()
             cursor.execute(sql, tuple(values))
@@ -87,11 +102,11 @@ class SynonymCRUD:
         finally:
             cursor.close()
 
-    def delete_word(self, synonym_id):
-        sql = 'DELETE FROM Word WHERE synonym_id = %s'
+    def delete_one(self, word_id):
+        sql = 'DELETE FROM Word WHERE id = %s'
         try:
             cursor = self.conn.cursor()
-            cursor.execute(sql, (synonym_id,))
+            cursor.execute(sql, (word_id,))
             self.conn.commit()
             return cursor.rowcount > 0
         except Error as e:
