@@ -116,3 +116,16 @@ class XCategoryCRUD:
             return False
         #finally:
         #    cursor.close()
+
+    def delete_all(self):
+        sql = '''DELETE FROM Category'''
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(sql)
+            self.conn.commit()
+            return cursor.rowcount > 0
+        except Error as e:
+            print(f"Error deleting words: {e}")
+            return False
+        #finally:
+        #    cursor.close()

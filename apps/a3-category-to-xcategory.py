@@ -1,43 +1,19 @@
+import services.dbconfig as dbconfig
+
 from classes.category_crud import CategoryCRUD
 from classes.x_category_detail_crud import XCategoryDetailCRUD
 from classes.x_category_crud import XCategoryCRUD
 
-import mysql.connector
-
-# Connection details
-host = 'localhost'
-user = 'root'
-password = 'barnista27'
-
-# Connect to mondictionary_v2
-conn1 = mysql.connector.connect(
-    host=host,
-    user=user,
-    password=password,
-    database='mondictionary_v2'
-)
-print("Connected to mondictionary_v2")
-
-# Connect to TheMonLanguageDictionary
-conn2 = mysql.connector.connect(
-    host=host,
-    user=user,
-    password=password,
-    database='TheMonLanguageDictionary'
-)
-print("Connected to TheMonLanguageDictionary")
-
-
 # Operations can be performed using conn1 and conn2
-category_crud = CategoryCRUD(host, user, password, 'mondictionary_v2')
+category_crud = CategoryCRUD(dbconfig.host, dbconfig.user, dbconfig.password, dbconfig.database1)
 category_crud.connect()
 categories = category_crud.read_all()
 print(categories)
 
-xcategory_crud = XCategoryCRUD(host, user, password, 'TheMonLanguageDictionary')
+xcategory_crud = XCategoryCRUD(dbconfig.host, dbconfig.user, dbconfig.password, dbconfig.database2)
 xcategory_crud.connect()
 
-xcategory_detail = XCategoryDetailCRUD(host, user, password, 'TheMonLanguageDictionary')
+xcategory_detail = XCategoryDetailCRUD(dbconfig.host, dbconfig.user, dbconfig.password, dbconfig.database2)
 xcategory_detail.connect()
 
 for cat in categories:
@@ -49,12 +25,12 @@ for cat in categories:
     mon_category_name = cat['mon_category_name']
     description = cat['description']
 
-    #category = xcategory_crud.create_with_id(
-    #    category_id=category_id,
-    #    parent_category_id=parent_category_id,
-    #    name=en_category_name,
-    #    author_id=1
-    #)
+    category = xcategory_crud.create_with_id(
+        category_id=category_id,
+        parent_category_id=parent_category_id,
+        name=en_category_name,
+        author_id=1
+    )
     category_detail = xcategory_detail.create(
         category_id=category_id,
         label=en_category_name,
@@ -79,5 +55,6 @@ for cat in categories:
 
 
 # Don't forget to close connections when done
-conn1.close()
-conn2.close()
+category_crud.close()
+xcategory_crud.close()
+xcategory_detail.close()

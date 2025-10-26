@@ -22,5 +22,25 @@ async def translate_bulk():
              # the lazy dog  ->  게으른 개
 
 
-asyncio.run(translate_bulk())
-asyncio.run(translate_text())
+async def translate_tha_to_eng(text):
+    async with Translator() as translator:
+        result = await translator.translate(text, src='th', dest='en')
+        return result.text
+    
+async def translate_tha_to_mya(text):
+    async with Translator() as translator:
+        result = await translator.translate(text, src='th', dest='my')
+        return result.text
+    
+async def translate_mya_to_eng(text):
+    async with Translator() as translator:
+        result = await translator.translate(text, src='my', dest='en')
+        return result.text
+
+async def translate_mya_to_tha(text):
+    async with Translator() as translator:
+        result = await translator.translate(text, src='my', dest='th')
+        return result.text
+
+#asyncio.run(translate_bulk())
+#asyncio.run(translate_text())

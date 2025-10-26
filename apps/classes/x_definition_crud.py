@@ -42,7 +42,7 @@ class XDefinitionCRUD:
         #    cursor.close()
 
     def read_all(self):
-        sql = 'SELECT * FROM Definition'
+        sql = 'SELECT * FROM Definition ORDER BY word_id'
         try:
             cursor = self.conn.cursor(dictionary=True)
             cursor.execute(sql)
@@ -97,5 +97,42 @@ class XDefinitionCRUD:
         except Error as e:
             print(f"Error deleting word: {e}")
             return False
+        #finally:
+        #    cursor.close()
+
+    def delete_all(self):
+        sql = 'DELETE FROM Definition'
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(sql)
+            self.conn.commit()
+            return cursor.rowcount
+        except Error as e:
+            print(f"Error deleting words: {e}")
+            return 0
+        #finally:
+        #    cursor.close()
+
+    def read_by_word_id(self, word_id):
+        sql = 'SELECT * FROM Definition WHERE word_id = %s'
+        try:
+            cursor = self.conn.cursor(dictionary=True)
+            cursor.execute(sql, (word_id,))
+            return cursor.fetchall()
+        except Error as e:
+            print(f"Error reading word: {e}")
+            return None
+        #finally:
+        #    cursor.close()
+
+    def read_by_lang_pos_and_definition(self, lang_code, pos_code, definition):
+        sql = 'SELECT * FROM Definition WHERE lang_code = %s AND pos_code = %s AND definition = %s'
+        try:
+            cursor = self.conn.cursor(dictionary=True)
+            cursor.execute(sql, (lang_code, pos_code, definition))
+            return cursor.fetchall()
+        except Error as e:
+            print(f"Error reading word: {e}")
+            return None
         #finally:
         #    cursor.close()

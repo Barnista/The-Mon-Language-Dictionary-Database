@@ -55,7 +55,6 @@ for mon_word, thai_word in word_pairs:
     print(f"Pronunciation: {th}")
 
 
-
 # Save processed data to a new CSV file
 output_rows = []
 for mon_word, thai_word in word_pairs: 

@@ -57,10 +57,22 @@ class XWordCRUD:
             cursor.close()
 
     def read_all(self):
-        sql = 'SELECT * FROM Word ORDER BY word ASC'
+        sql = 'SELECT * FROM Word ORDER BY id'
         try:
             cursor = self.conn.cursor(dictionary=True)
             cursor.execute(sql)
+            return cursor.fetchall()
+        except Error as e:
+            print(f"Error reading word: {e}")
+            return None
+        #finally:
+        #    cursor.close()
+
+    def read_with_limit(self, start_id, end_id):
+        sql = 'SELECT * FROM Word WHERE id >= %s AND id <= %s ORDER BY id'
+        try:
+            cursor = self.conn.cursor(dictionary=True)
+            cursor.execute(sql, (start_id, end_id))
             return cursor.fetchall()
         except Error as e:
             print(f"Error reading word: {e}")
@@ -74,6 +86,30 @@ class XWordCRUD:
             cursor = self.conn.cursor(dictionary=True)
             cursor.execute(sql, (word_id,))
             return cursor.fetchone()
+        except Error as e:
+            print(f"Error reading word: {e}")
+            return None
+        finally:
+            cursor.close()
+
+    def read_by_word(self, word):
+        sql = 'SELECT * FROM Word WHERE word = %s'
+        try:
+            cursor = self.conn.cursor(dictionary=True)
+            cursor.execute(sql, (word,))
+            return cursor.fetchall()
+        except Error as e:
+            print(f"Error reading word: {e}")
+            return None
+        finally:
+            cursor.close()
+
+    def read_by_word_and_ipa(self, word, ipa):
+        sql = 'SELECT * FROM Word WHERE word = %s AND ipa = %s'
+        try:
+            cursor = self.conn.cursor(dictionary=True)
+            cursor.execute(sql, (word, ipa))
+            return cursor.fetchall()
         except Error as e:
             print(f"Error reading word: {e}")
             return None
@@ -114,3 +150,14 @@ class XWordCRUD:
             return False
         finally:
             cursor.close()
+
+    def delete_all(self):
+        sql = 'DELETE FROM Word'
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(sql)
+            self.conn.commit()
+            return cursor.rowcount
+        except Error as e:
+            print(f"Error deleting words: {e}")
+            return 0
