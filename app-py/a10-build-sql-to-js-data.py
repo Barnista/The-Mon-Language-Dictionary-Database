@@ -17,7 +17,7 @@ SRC_Category = (HERE / "../sql/data/Category.sql").resolve()
 SRC_CategoryDetail = (HERE / "../sql/data/CategoryDetail.sql").resolve()
 SRC_Definition = (HERE / "../sql/data/Definition.sql").resolve()
 SRC_Word = (HERE / "../sql/data/Word.sql").resolve()
-OUT_DIR = (HERE / "../dist/assets/database").resolve()
+OUT_DIR = (HERE / "../docs/assets/database").resolve()
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 def build_sql_js(sql):

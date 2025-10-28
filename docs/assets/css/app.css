@@ -1,0 +1,55 @@
+@font-face {
+  font-family: 'Myanmar Text';
+  src: url('../fonts/mmrtext.ttf'), url('../fonts/mmrtextb.ttf');
+}
+
+@font-face {
+  font-family: 'Padauk';
+  src: url('../fonts/Padauk-Regular.ttf'),
+    url('../fonts/Padauk-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Noto Sans Myanmar';
+  src: url('../fonts/NotoSansMyanmar-Regular.ttf'),
+    url('../fonts/NotoSansMyanmar-Medium.ttf'),
+    url('../fonts/NotoSansMyanmar-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Pyidaungsu';
+  src: url('../fonts/Pyidaungsu-2.5.4_Regular.ttf'),
+    url('../fonts/Pyidaungsu-2.5.4_Bold.ttf'),
+    url('../fonts/PyidaungsuNumbers-Regular.ttf');
+}
+
+body,
+html {
+  font-family: "Pyidaungsu",
+    "Padauk",
+    "Myanmar Text",
+    "Noto Sans Myanmar",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    "Noto Sans",
+    "Liberation Sans",
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
+}
+
+#sql-hilight {
+  cursor: pointer;
+  min-height: 300px;
+}
+
+#sql-input {
+  min-height: 300px;
+}

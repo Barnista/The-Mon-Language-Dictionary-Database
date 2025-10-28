@@ -1,0 +1,64 @@
+/* VSCode Dark+ look for highlight.js tokens */
+.vscode-sql {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 16px;
+    line-height: 1.45;
+    display: block;
+    padding: 12px;
+    border-radius: 6px;
+    tab-size: 2;
+    -webkit-font-smoothing: antialiased;
+    white-space: pre;
+    overflow: auto;
+}
+
+/* Common hljs token overrides to resemble VSCode Dark+ */
+.vscode-sql .hljs-comment,
+.vscode-sql .hljs-quote {
+    color: #6A9955;
+}
+
+.vscode-sql .hljs-keyword {
+    color: #569CD6;
+    font-weight: 600;
+}
+
+.vscode-sql .hljs-built_in,
+.vscode-sql .hljs-type {
+    color: #4EC9B0;
+}
+
+.vscode-sql .hljs-string {
+    color: #CE9178;
+}
+
+.vscode-sql .hljs-number {
+    color: #B5CEA8;
+}
+
+.vscode-sql .hljs-title,
+.vscode-sql .hljs-function .hljs-title {
+    color: #DCDCAA;
+}
+
+.vscode-sql .hljs-attr {
+    color: #9CDCFE;
+}
+
+.vscode-sql .hljs-variable {
+    color: #9CDCFE;
+}
+
+.vscode-sql .hljs-meta {
+    color: #9CDCFE;
+}
+
+.vscode-sql .hljs-strong {
+    font-weight: 700;
+}
+
+.vscode-sql .hljs-emphasis {
+    font-style: italic;
+}
