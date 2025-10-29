@@ -9,7 +9,7 @@ xauthor_crud.connect()
 author1_id = xauthor_crud.create_with_id(
     id=1,
     name='Nai Sac Lun',
-    bio='Mon-Burmese Dictionar Compiler.',
+    bio='Mon-Burmese Dictionary Compiler.',
 )
 
 author2_id = xauthor_crud.create_with_id(

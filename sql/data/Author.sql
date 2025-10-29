@@ -8,7 +8,7 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 SET NAMES utf8mb4;
 
 INSERT INTO `Author` (`id`, `name`, `bio`) VALUES
-(1,	'Nai Sac Lun',	'Mon-Burmese Dictionar Compiler.'),
+(1,	'Nai Sac Lun',	'Mon-Burmese Dictionary Compiler.'),
 (2,	'Mahajaroon’s Committee',	'Mon-Thai Dictionary Compiler.'),
 (3,	'Nai Sac Lun and Mahajaroon’s Committee',	'Nai Sac Lun and Mahajaroon’s Committee combination.'),
 (4,	'Barnista',	'Project Lead, The Mon Language Dictionary Database.'),

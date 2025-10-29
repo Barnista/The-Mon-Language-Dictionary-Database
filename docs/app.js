@@ -15,6 +15,9 @@ const radio_query_8 = document.getElementById('query8');
 const radio_query_9 = document.getElementById('query9');
 const radio_query_10 = document.getElementById('query10');
 const radio_query_11 = document.getElementById('query11');
+const radio_query_12 = document.getElementById('query12');
+const radio_query_13 = document.getElementById('query13');
+const radio_query_14 = document.getElementById('query14');
 
 let h_output = document.getElementById('h-output');
 let data_div = document.getElementById('data-div');
@@ -210,6 +213,27 @@ function initGUI(engine, db) {
         }
     });
 
+    radio_query_12.addEventListener('click', function (event) {
+        if (event.target && event.target.matches("input[type='radio']")) {
+            // switch to selected table
+            selectQuery(DB_QUERY_INSTANTS.SELECT_Definition_JOIN_Category_WHERE);
+        }
+    });
+
+    radio_query_13.addEventListener('click', function (event) {
+        if (event.target && event.target.matches("input[type='radio']")) {
+            // switch to selected table
+            selectQuery(DB_QUERY_INSTANTS.SELECT_Definition_JOIN_Word_WHERE_Definition);
+        }
+    });
+
+    radio_query_14.addEventListener('click', function (event) {
+        if (event.target && event.target.matches("input[type='radio']")) {
+            // switch to selected table
+            selectQuery(DB_QUERY_INSTANTS.SELECT_Author_Summary);
+        }
+    });
+
     btn_run.addEventListener('click', function (event) {
         if (built_query) {
             console.log(built_query);
@@ -304,7 +328,7 @@ function displayResult(table_name, columns, values, isScrollResult) {
     });
 
     // Scrolls the target element into view, optionally with smooth animation.
-    if(isScrollResult) h_output.scrollIntoView({ behavior: 'smooth' });
+    if (isScrollResult) h_output.scrollIntoView({ behavior: 'smooth' });
 }
 
 function displayNoResult() {

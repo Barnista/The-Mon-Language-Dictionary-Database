@@ -418,8 +418,9 @@ const DB_QUERY_INSTANTS = {
         JOIN 
             Author ON Definition.author_id = Author.id
         WHERE 
-            Definition.definition LIKE 'rice%' OR
-            Definition.definition LIKE '%rice'
+            Definition.definition LIKE '%rice%' OR
+            Definition.definition LIKE '%ข้าว%' OR
+            Definition.definition LIKE '%ထမင်း%'
         ORDER BY
             Word.word ASC
         LIMIT 1000;
@@ -465,4 +466,73 @@ const DB_QUERY_INSTANTS = {
             Word.word ASC
         LIMIT 1000;
     `,
+    SELECT_Definition_JOIN_Category_WHERE: `
+        SELECT 
+            Category.name as 'Category',
+            Word.word as 'Mon Word',
+            Definition.definition as 'Definition',
+            Definition.lang_code as 'Language',
+            Definition.pos_code as 'Part of Speech',
+            Author.name as 'Author'
+        FROM 
+            Definition
+        JOIN 
+            Word ON Word.id = Definition.word_id
+        JOIN
+            Category ON Category.id = Definition.category_id
+        JOIN 
+            Author ON Definition.author_id = Author.id
+        WHERE 
+            Definition.category_id IS NOT NULL AND
+            Category.name LIKE '%Fruits%'
+        ORDER BY
+            Word.word ASC
+        LIMIT 1000;
+    `,
+    SELECT_Definition_JOIN_Word_WHERE_Definition: `
+        SELECT 
+            Word.word as 'Mon Word',
+            Word.ipa as 'IPA',
+            Word.th as 'TH',
+            Definition.definition as 'Definition',
+            Definition.lang_code as 'Language',
+            Definition.pos_code as 'Part of Speech',
+            Author.name as 'Author'
+        FROM 
+            Definition
+        JOIN 
+            Word ON Word.id = Definition.word_id
+        JOIN 
+            Author ON Definition.author_id = Author.id
+        WHERE 
+            Definition.definition LIKE 'Ministry%'
+        ORDER BY
+            Word.word ASC
+        LIMIT 1000;
+    `,
+    SELECT_Author_Summary: `
+        SELECT 
+            A1.name as 'Name',
+            A1.bio as 'Bio',
+            (SELECT COUNT(*) 
+                FROM 
+                    Word 
+                JOIN 
+                    Author ON Word.author_id = Author.id 
+                WHERE 
+                    Author.name LIKE CONCAT('%', A1.name, '%')
+            ) as 'Word Compiled',
+            (SELECT COUNT(*) 
+                FROM 
+                    Definition 
+                JOIN 
+                    Author ON Definition.author_id = Author.id 
+                WHERE 
+                    Author.name LIKE CONCAT('%', A1.name, '%')
+            ) as 'Definition Compiled' 
+        FROM
+            Author as A1 
+        WHERE
+            A1.id = 1 OR A1.id = 2; 
+    `
 }
