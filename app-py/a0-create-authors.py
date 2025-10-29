@@ -14,14 +14,14 @@ author1_id = xauthor_crud.create_with_id(
 
 author2_id = xauthor_crud.create_with_id(
     id=2,
-    name='Anonta Mon',
+    name='Mahajaroon’s Committee',
     bio='Mon-Thai Dictionary Compiler.',
 )
 
 author3_id = xauthor_crud.create_with_id(
     id=3,
-    name='Nai Sac Lun & Anonta Mon',
-    bio='Nai Sac Lun and Anonta Mon combination.',
+    name='Nai Sac Lun & Mahajaroon’s Committee',
+    bio='Nai Sac Lun and Mahajaroon’s Committee combination.',
 )
 
 author4_id = xauthor_crud.create_with_id(
@@ -52,4 +52,10 @@ author8_id = xauthor_crud.create_with_id(
     id=8,
     name='Community Contributions',
     bio='Definitions and examples contributed by the community.',
+)
+
+author9_id = xauthor_crud.create_with_id(
+    id=9,
+    name='Anonta Mon',
+    bio='Co-developer, The Mon Language Dictionary Database.',
 )
