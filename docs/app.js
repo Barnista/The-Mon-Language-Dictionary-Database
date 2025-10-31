@@ -18,6 +18,10 @@ const radio_query_11 = document.getElementById('query11');
 const radio_query_12 = document.getElementById('query12');
 const radio_query_13 = document.getElementById('query13');
 const radio_query_14 = document.getElementById('query14');
+const radio_query_15 = document.getElementById('query15');
+const radio_query_16 = document.getElementById('query16');
+const radio_query_17 = document.getElementById('query17');
+
 
 let h_output = document.getElementById('h-output');
 let data_div = document.getElementById('data-div');
@@ -189,6 +193,8 @@ function initGUI(engine, db) {
         if (event.target && event.target.matches("input[type='radio']")) {
             // switch to selected table
             selectQuery(DB_QUERY_INSTANTS.SELECT_Word_JOIN_Definition_JOIN_Author);
+            //AUTO SCROLL DOWN
+            scrollToSQLHilight();
         }
     });
 
@@ -196,6 +202,8 @@ function initGUI(engine, db) {
         if (event.target && event.target.matches("input[type='radio']")) {
             // switch to selected table
             selectQuery(DB_QUERY_INSTANTS.SELECT_Word_JOIN_Definition_WHERE_Definition);
+            //AUTO SCROLL DOWN
+            scrollToSQLHilight();
         }
     });
 
@@ -203,6 +211,8 @@ function initGUI(engine, db) {
         if (event.target && event.target.matches("input[type='radio']")) {
             // switch to selected table
             selectQuery(DB_QUERY_INSTANTS.SELECT_Word_JOIN_Word_WHERE_Synonym);
+            //AUTO SCROLL DOWN
+            scrollToSQLHilight();
         }
     });
 
@@ -210,6 +220,8 @@ function initGUI(engine, db) {
         if (event.target && event.target.matches("input[type='radio']")) {
             // switch to selected table
             selectQuery(DB_QUERY_INSTANTS.SELECT_Word_JOIN_Definition_WHERE_IS_Pronoun);
+            //AUTO SCROLL DOWN
+            scrollToSQLHilight();
         }
     });
 
@@ -217,6 +229,8 @@ function initGUI(engine, db) {
         if (event.target && event.target.matches("input[type='radio']")) {
             // switch to selected table
             selectQuery(DB_QUERY_INSTANTS.SELECT_Definition_JOIN_Category_WHERE);
+            //AUTO SCROLL DOWN
+            scrollToSQLHilight();
         }
     });
 
@@ -224,13 +238,44 @@ function initGUI(engine, db) {
         if (event.target && event.target.matches("input[type='radio']")) {
             // switch to selected table
             selectQuery(DB_QUERY_INSTANTS.SELECT_Definition_JOIN_Word_WHERE_Definition);
+            //AUTO SCROLL DOWN
+            scrollToSQLHilight();
         }
     });
 
     radio_query_14.addEventListener('click', function (event) {
         if (event.target && event.target.matches("input[type='radio']")) {
             // switch to selected table
+            selectQuery(DB_QUERY_INSTANTS.SELECT_Definition_Thai_Only);
+            //AUTO SCROLL DOWN
+            scrollToSQLHilight();
+        }
+    });
+
+    radio_query_15.addEventListener('click', function (event) {
+        if (event.target && event.target.matches("input[type='radio']")) {
+            // switch to selected table
             selectQuery(DB_QUERY_INSTANTS.SELECT_Author_Summary);
+            //AUTO SCROLL DOWN
+            scrollToSQLHilight();
+        }
+    });
+
+    radio_query_16.addEventListener('click', function (event) {
+        if (event.target && event.target.matches("input[type='radio']")) {
+            // switch to selected table
+            selectQuery(DB_QUERY_INSTANTS.UNDEFINED_WORDS);
+            //AUTO SCROLL DOWN
+            scrollToSQLHilight();
+        }
+    });
+
+    radio_query_17.addEventListener('click', function (event) {
+        if (event.target && event.target.matches("input[type='radio']")) {
+            // switch to selected table
+            selectQuery(DB_QUERY_INSTANTS.CONFUSING_DIACRITICS_1);
+            //AUTO SCROLL DOWN
+            scrollToSQLHilight();
         }
     });
 
@@ -266,6 +311,11 @@ function hilighCode() {
     }
     code.textContent = built_query;
     hljs.highlightBlock(code); // Re-highlight
+}
+
+function scrollToSQLHilight() {
+    const hcode = document.getElementById('h-sql');
+    hcode.scrollIntoView({ behavior: 'smooth' });
 }
 
 async function execQuery(db, query, isScrollResult) {

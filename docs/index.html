@@ -29,49 +29,13 @@
     <!-- LOAD Custom Stylesheets -->
     <link rel="stylesheet" href="./assets/css/vscode.css">
     <link rel="stylesheet" href="./assets/css/app.css">
-
-    <!-- LOAD The Mon Language Database DATA -->
-    <script src="./assets/database/author_1.js"></script>
-    <script src="./assets/database/category_1.js"></script>
-    <script src="./assets/database/categorydetail_1.js"></script>
-    <script src="./assets/database/word_1.js"></script>
-    <script src="./assets/database/word_2.js"></script>
-    <script src="./assets/database/word_3.js"></script>
-    <script src="./assets/database/definition_1.js"></script>
-    <script src="./assets/database/definition_2.js"></script>
-    <script src="./assets/database/definition_3.js"></script>
-    <script src="./assets/database/definition_4.js"></script>
-    <script src="./assets/database/definition_5.js"></script>
-    <script src="./assets/database/definition_6.js"></script>
-    <script src="./assets/database/definition_7.js"></script>
-    <script src="./assets/database/definition_8.js"></script>
-    <script src="./assets/database/definition_9.js"></script>
-    <script src="./assets/database/definition_10.js"></script>
-    <script src="./assets/database/definition_11.js"></script>
-    <script src="./assets/database/definition_12.js"></script>
-    <script src="./assets/database/definition_13.js"></script>
-    <script src="./assets/database/definition_14.js"></script>
-    <script src="./assets/database/definition_15.js"></script>
-    <script src="./assets/database/definition_16.js"></script>
-    <script src="./assets/database/definition_17.js"></script>
-    <script src="./assets/database/definition_18.js"></script>
-    <script src="./assets/database/definition_19.js"></script>
-    <script src="./assets/database/definition_20.js"></script>
-    <script src="./assets/database/definition_21.js"></script>
-    <script src="./assets/database/definition_22.js"></script>
-    <script src="./assets/database/definition_23.js"></script>
-    <script src="./assets/database/definition_24.js"></script>
-    <!-- LOAD The Mon Language Database SERVICE -->
-    <script src="./services/db/tables.js"></script>
-    <script src="./services/db/db.js"></script>
-    <script src="./services/db/query.js"></script>
 </head>
 
 <body data-bs-theme="dark">
     <nav class="navbar navbar-dark bg-dark fixed-top shadow-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="./assets/logo32.png" alt="Bootstrap" width="32" height="32">
+                <!--<img src="./assets/logo32.png" alt="Bootstrap" width="32" height="32">-->
                 The Mon Language Dictionary Database
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
@@ -135,7 +99,7 @@
                         <small class="d-block text-muted">Logo 128x128</small>
                     </div>
                     <div class="col-12 col-md-12 col-lg-8 mb-3">
-                        <h5>Version 1.7</h5>
+                        <h5>Version 1.8</h5>
                         <ul>
                             <li>
                                 🛢️ Support SQLite and MySQL:
@@ -220,7 +184,19 @@
                             </label>
                             <input type="radio" class="btn-check" name="options-query" id="query14" autocomplete="off">
                             <label class="btn btn-outline-warning shadow mb-2" for="query14">
+                                📖 Mon-Thai: Search for Word "ထေက်"
+                            </label>
+                            <input type="radio" class="btn-check" name="options-query" id="query15" autocomplete="off">
+                            <label class="btn btn-outline-warning shadow mb-2" for="query15">
                                 ℹ️ Summary About Dictionary Compilers
+                            </label>
+                            <input type="radio" class="btn-check" name="options-query" id="query16" autocomplete="off">
+                            <label class="btn btn-outline-danger shadow mb-2" for="query16">
+                                ❔ Undefined Words (no definition yet)
+                            </label>
+                            <input type="radio" class="btn-check" name="options-query" id="query17" autocomplete="off">
+                            <label class="btn btn-outline-danger shadow mb-2" for="query17">
+                                😰 Ambiguous diacritic "ံ" that causes confusion in pronunciation (can be extracted into မ်, ၚ်, ဟ်, or အ်).
                             </label>
                         </div>
                     </div>
@@ -228,7 +204,7 @@
             </div>
         </div>
         <div class="mt-5">
-            <h3>⚙️ Edit SQL Command</h3>
+            <h3 id="h-sql">⚙️ Edit SQL Command</h3>
             <div id="sql-container" onclick="activateEditor(event)">
                 <code id="sql-hilight" class="language-sql vscode-sql p-3 shadow" spellcheck="true"
                     aria-label="SQL editor preview"></code>
@@ -322,7 +298,7 @@
                     <p>
                         The Mon Language Dictionary Database
                         <br>
-                        Open Source: v1.7
+                        Open Source: v1.8
                     </p>
                     <p>
                         MIT License <br>
@@ -333,6 +309,43 @@
         </div>
 
     </footer>
+
+    <!-- LOAD The Mon Language Database DATA -->
+    <script src="./assets/database/author_1.js"></script>
+    <script src="./assets/database/category_1.js"></script>
+    <script src="./assets/database/categorydetail_1.js"></script>
+    <script src="./assets/database/word_1.js"></script>
+    <script src="./assets/database/word_2.js"></script>
+    <script src="./assets/database/word_3.js"></script>
+    <script src="./assets/database/definition_1.js"></script>
+    <script src="./assets/database/definition_2.js"></script>
+    <script src="./assets/database/definition_3.js"></script>
+    <script src="./assets/database/definition_4.js"></script>
+    <script src="./assets/database/definition_5.js"></script>
+    <script src="./assets/database/definition_6.js"></script>
+    <script src="./assets/database/definition_7.js"></script>
+    <script src="./assets/database/definition_8.js"></script>
+    <script src="./assets/database/definition_9.js"></script>
+    <script src="./assets/database/definition_10.js"></script>
+    <script src="./assets/database/definition_11.js"></script>
+    <script src="./assets/database/definition_12.js"></script>
+    <script src="./assets/database/definition_13.js"></script>
+    <script src="./assets/database/definition_14.js"></script>
+    <script src="./assets/database/definition_15.js"></script>
+    <script src="./assets/database/definition_16.js"></script>
+    <script src="./assets/database/definition_17.js"></script>
+    <script src="./assets/database/definition_18.js"></script>
+    <script src="./assets/database/definition_19.js"></script>
+    <script src="./assets/database/definition_20.js"></script>
+    <script src="./assets/database/definition_21.js"></script>
+    <script src="./assets/database/definition_22.js"></script>
+    <script src="./assets/database/definition_23.js"></script>
+    <script src="./assets/database/definition_24.js"></script>
+
+    <!-- LOAD The Mon Language Database SERVICE -->
+    <script src="./services/db/tables.js"></script>
+    <script src="./services/db/db.js"></script>
+    <script src="./services/db/query.js"></script>
 
     <!-- LOAD THIS PAGE APP'S LOGICS -->
     <script src="./app.js"></script>
