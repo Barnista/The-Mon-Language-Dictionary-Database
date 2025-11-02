@@ -159,3 +159,170 @@ class LibRule:
     def find_blend_th(self, vowel):
         return next((rule for rule in self.rules['blendTHs'] 
                      if rule['vowel'] == vowel), None)
+    
+    # Exceptional rules for blend compounds NOTICED BY Mr.Zuzarz
+    def find_blend_compound_exceptional(self, consonant, compound, vowel, final_consonant):
+        # Consonant + Compound exceptional rules
+        if consonant == 'က' and compound == 'ျ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': False,
+            }
+        if consonant == 'ခ' and compound == 'ျ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': False,
+            }
+        if consonant == 'ဂ' and compound == 'ျ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': True,
+            }
+        if consonant == 'ဖ' and compound == 'ျ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': False,
+            }
+        if consonant == 'စ' and compound == 'ြ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': False,
+            }
+        if consonant == 'ဇ' and compound == 'ြ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': True,
+            }
+        if consonant == 'သ' and compound == 'ြ':
+            # သ +  ြ  = "s" sound
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': False,
+            }
+        if consonant == 'တ' and compound == 'ြ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': False,
+            }
+        if consonant == 'ဒ' and compound == 'ြ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': True,
+            }
+        if consonant == 'သ' and compound == 'ၠ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': False,
+            }
+        if consonant == 'ဇ' and compound == 'ွ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': True,
+            }
+        if consonant == 'တ' and compound == 'ွ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': False,
+            }
+        if consonant == 'သ' and compound == 'ွ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': False,
+            }
+        if consonant == 'သ' and compound == '္ၚ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': False,
+            }
+        if consonant == 'ဇ' and compound == '္ၚ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': True,
+            }
+        if consonant == 'သ' and compound == '္ဇ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': False,
+            }
+        if consonant == 'ရ' and compound == 'ှ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': False,
+            }
+        if consonant == 'ည' and compound == 'ှ':
+            return {
+                'consonant': consonant+compound,
+                'compound': '',
+                'vowel': vowel,
+                'final_consonant': final_consonant,
+                'is_breathy': False,
+            }
+        # Compound + Final consonant exceptional rules
+        if compound == 'ွ' and vowel == '' and final_consonant == 'မ်':
+            return {
+                'consonant': consonant,
+                'compound': '',
+                'vowel': 'ို',
+                'final_consonant': final_consonant,
+            }
+        elif compound == 'ွ' and vowel == '' and final_consonant == 'ယ်':
+            # for example မွဲ
+            return {
+                'consonant': consonant,
+                'compound': '',
+                'vowel': '',
+                'final_consonant': final_consonant,
+            }
+        
+        return None

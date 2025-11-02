@@ -34,7 +34,10 @@ const DBEngine = {
         try {
             const db = new SqlJS.Database();
             // Create database according to the design v1
-            db.run(dbTables);
+            for (let i = 0; i < dbTables.length; i++) {
+                const dbTable = dbTables[i];
+                db.run(dbTable);
+            }
             for (let i = 0; i < dbDatas.length; i++) {
                 const dbData = dbDatas[i];
                 db.run(dbData);

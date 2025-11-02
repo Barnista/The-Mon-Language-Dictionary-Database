@@ -1,0 +1,7 @@
+const DB_TABLES_1 = `
+CREATE TABLE Author (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    bio TEXT
+);
+`;

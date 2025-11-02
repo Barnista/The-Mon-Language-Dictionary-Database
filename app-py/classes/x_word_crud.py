@@ -161,3 +161,39 @@ class XWordCRUD:
         except Error as e:
             print(f"Error deleting words: {e}")
             return 0
+        
+    def read_filter_in_diacritic(self, diacritic):
+        sql = 'SELECT * FROM Word WHERE word LIKE %s ORDER BY id'
+        pattern = f"%{diacritic}%"
+        try:
+            cursor = self.conn.cursor(dictionary=True)
+            cursor.execute(sql, (pattern,))
+            return cursor.fetchall()
+        except Error as e:
+            print(f"Error reading words with diacritic: {e}")
+            return None
+        #finally:
+        #    cursor.close()
+
+    def update_filter_in_diacritic(self, diacritic, **kwargs):
+        fields = []
+        values = []
+        for key, value in kwargs.items():
+            fields.append(f"{key} = %s")
+            values.append(value)
+        if not fields:
+            print("No fields to update.")
+            return 0
+        sql = f"UPDATE Word SET {', '.join(fields)} WHERE word LIKE %s"
+        pattern = f"%{diacritic}%"
+        values.append(pattern)
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(sql, tuple(values))
+            self.conn.commit()
+            return cursor.rowcount
+        except Error as e:
+            print(f"Error updating words with diacritic: {e}")
+            return 0
+        finally:
+            cursor.close()

@@ -26,12 +26,10 @@ const radio_query_17 = document.getElementById('query17');
 let h_output = document.getElementById('h-output');
 let data_div = document.getElementById('data-div');
 let data_table = null;
-//const data_head = document.getElementById('data-head');
-//const data_body = document.getElementById('data-body');
 const error_label = document.getElementById('error-label');
 const btn_run = document.getElementById('btn-run');
 
-let selected_table = DB_QUERY.Word.tableName;
+let selected_table = DB_TABLE.Word;
 let selected_query = DB_QUERY_PRESET.SELECT_ALL;
 let built_query = "";
 let result = null;
@@ -46,7 +44,13 @@ async function start() {
 
         const db = DBEngine.createDB(
             engine,
-            DB_TABLES,
+            [
+                DB_TABLES_1,
+                DB_TABLES_2,
+                DB_TABLES_3,
+                DB_TABLES_4,
+                DB_TABLES_5
+            ],
             [
                 DB_DATA_AUTHOR_1,
                 DB_DATA_CATEGORY_1,
@@ -82,21 +86,6 @@ async function start() {
         DBEngine.insertData(db, DB_DATA_DEFINITION_23);
         DBEngine.insertData(db, DB_DATA_DEFINITION_24);
 
-        const authors_count = DB_QUERY.Author.count(db).exec();
-        console.log('Authors COUNT:', authors_count);
-
-        const categories_count = DB_QUERY.Category.count(db).exec();
-        console.log('Categories COUNT:', categories_count);
-
-        const category_details_count = DB_QUERY.CategoryDetail.count(db).exec();
-        console.log('CategoryDetails COUNT:', category_details_count);
-
-        const words_count = DB_QUERY.Word.count(db).exec();
-        console.log('Words COUNT:', words_count);
-
-        const definitions_count = DB_QUERY.Definition.count(db).exec();
-        console.log('Definitions COUNT:', definitions_count);
-
         initGUI(engine, db);
         rebuildQuery();
         execQuery(db, built_query, false);
@@ -106,36 +95,34 @@ async function start() {
 }
 
 function initGUI(engine, db) {
-    //data_table = new DataTable('#data-table');
-
     radio_table_1.addEventListener('click', function (event) {
         if (event.target && event.target.matches("input[type='radio']")) {
             // switch to selected table
-            selectTable(DB_QUERY.Word.tableName);
+            selectTable(DB_TABLE.Word);
         }
     });
     radio_table_2.addEventListener('click', function (event) {
         if (event.target && event.target.matches("input[type='radio']")) {
             // switch to selected table
-            selectTable(DB_QUERY.Definition.tableName);
+            selectTable(DB_TABLE.Definition);
         }
     });
     radio_table_3.addEventListener('click', function (event) {
         if (event.target && event.target.matches("input[type='radio']")) {
             // switch to selected table
-            selectTable(DB_QUERY.Category.tableName);
+            selectTable(DB_TABLE.Category);
         }
     });
     radio_table_4.addEventListener('click', function (event) {
         if (event.target && event.target.matches("input[type='radio']")) {
             // switch to selected table
-            selectTable(DB_QUERY.CategoryDetail.tableName);
+            selectTable(DB_TABLE.CategoryDetail);
         }
     });
     radio_table_5.addEventListener('click', function (event) {
         if (event.target && event.target.matches("input[type='radio']")) {
             // switch to selected table
-            selectTable(DB_QUERY.Author.tableName);
+            selectTable(DB_TABLE.Author);
         }
     });
 
@@ -394,12 +381,14 @@ function displayNoResult() {
 function toggleDataDiv(bool, msg) {
     if (bool) {
         $('#data-div').show();
+        $('#data-table').hide();
         if (msg) data_div.innerHTML = `<span class="text-danger">${msg.toString()}</span>`;
         else data_div.innerHTML = 'No result found.';
         // Scrolls the target element into view, optionally with smooth animation.
         h_output.scrollIntoView({ behavior: 'smooth' });
     } else {
         $('#data-div').hide();
+        $('#data-table').show();
     }
 }
 

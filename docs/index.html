@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Mon Language Dictionary Database — Demo</title> <!-- LOAD sql.js v1.13.0 for SQLite web-based engine-->
+    <title>MonDictDB — Docs & Demo</title>
+    <!-- LOAD sql.js v1.13.0 for SQLite web-based engine-->
     <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
 
     <!-- LOAD Hilight.js 11.11.1 -->
@@ -35,8 +36,8 @@
     <nav class="navbar navbar-dark bg-dark fixed-top shadow-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <!--<img src="./assets/logo32.png" alt="Bootstrap" width="32" height="32">-->
-                The Mon Language Dictionary Database
+                <img src="./assets/logo32.png" alt="Bootstrap" width="26" height="26">
+                MonDictDB — Docs & Demo
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
@@ -46,7 +47,7 @@
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">The Mon Language Dictionary Database</h5>
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">MonDictDB</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
@@ -57,7 +58,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://github.com/Barnista/The-Mon-Language-Dictionary-Database"
-                                target="_blank">𖦥 GitHub</a>
+                                target="_blank">𖦥 Visit on GitHub</a>
                         </li>
                         <!--<li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -83,10 +84,10 @@
         </div>
     </nav>
 
-    <div class="mt-5 p-4">
+    <div class="mt-5 pt-4 px-4">
         <div class="row mt-4">
             <div class="col-12 col-md-6 col-xl-5 mb-3">
-                <h1>Docs & Demo</h1>
+                <h1>Web Demo (using SQL.js)</h1>
                 <p class="muted">Interactive demo showing how to manage an open-source & centralized dictionary database
                     of
                     The Mon Language using SQL commands to create,
@@ -99,23 +100,24 @@
                         <small class="d-block text-muted">Logo 128x128</small>
                     </div>
                     <div class="col-12 col-md-12 col-lg-8 mb-3">
-                        <h5>Version 1.8</h5>
+                        <h5>Version 1.9</h5>
                         <ul>
                             <li>
                                 🛢️ Support SQLite and MySQL:
                                 <a href="https://github.com/Barnista/The-Mon-Language-Dictionary-Database/tree/main/sql"
-                                    target="_blank">Download (26 mb.)</a>
+                                    target="_blank">Download (~30mb)</a>
                             </li>
                             <li>
-                                🔤 25,361 words. 💬 80,866 definitions.
+                                🔤 26,199 words. 💬 77,622 definitions.
                             </li>
                             <li>
                                 🌍 Support Mon-English, Mon-Thai, & Mon-Burmese.
                             </li>
                         </ul>
                         <div class="">
-                            <a href="https://github.com/Barnista/The-Mon-Language-Dictionary-Database"
-                                class="btn btn-secondary shadow" target="_blank">🤖 Fork on GitHub</a>
+                            <a class="btn btn-primary shadow"
+                                href="https://github.com/Barnista/The-Mon-Language-Dictionary-Database"
+                                target="_blank">𖦥 Visit on GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -196,7 +198,8 @@
                             </label>
                             <input type="radio" class="btn-check" name="options-query" id="query17" autocomplete="off">
                             <label class="btn btn-outline-danger shadow mb-2" for="query17">
-                                😰 Ambiguous diacritic "ံ" that causes confusion in pronunciation (can be extracted into မ်, ၚ်, ဟ်, or အ်).
+                                😰 Ambiguous diacritic "ံ" that causes confusion in pronunciation (can be extracted into
+                                မ်, ၚ်, ဟ်, or အ်).
                             </label>
                         </div>
                     </div>
@@ -214,8 +217,9 @@
                 <button class="btn btn-success mb-2 shadow" id="btn-run">⚡ Run SQL</button>
             </div>
         </div>
+        <hr>
     </div>
-    <div class="p-4">
+    <div class="pt-4 px-4">
         <h3 id="h-output">📊 Data Outputs</h3>
         <div id="data-div" class="py-5 fs-4 text-center rounded border shadow-lg">
             No result found.
@@ -226,14 +230,187 @@
             <tbody>
             </tbody>
         </table>
+        <hr>
     </div>
-    <div class="p-4">
-        <h3>Database Design</h3>
-        <p>
-            The Mon Language dictionary database design has been simplified and redesigned by Barnista; derived from Nai
-            Saik Chan's A Ar dictionary database.
-        </p>
-        <img src="./assets/imgs/database-design.jpg" class="w-100 h-auto">
+    <div class="pt-4 px-4">
+        <div class="row">
+            <div class="col-12 col-xl-7 mb-5">
+                <h3>📐 Database Design</h3>
+                <p>
+                    MonDictDB design has been simplified and redesigned by Barnista; derived
+                    from Nai
+                    Saik Chan's A Ar dictionary database.
+                </p>
+                <img src="./assets/imgs/database-design.jpg" class="w-100 h-auto">
+            </div>
+            <div class="col-12 col-xl-5 mb-5">
+                <h3>📄 Metadata</h3>
+                <p>
+                    This metadata fields are used to identify language, part of speech, and pronunciation originality
+                </p>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <h5 class="text-warning">ISO 639-3: Language Code (lang_code)</h5>
+                        <table class="table shadow">
+                            <thead>
+                                <tr>
+                                    <th>lang_code</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>mnw</td>
+                                    <td class="fst-italic text-muted">Mon (Modern Mon)</td>
+                                </tr>
+                                <tr>
+                                    <td>omx</td>
+                                    <td class="fst-italic text-muted">Mon (Old Mon)</td>
+                                </tr>
+                                <tr>
+                                    <td>mya</td>
+                                    <td class="fst-italic text-muted">Burmese (Myanmese)</td>
+                                </tr>
+                                <tr>
+                                    <td>tha</td>
+                                    <td class="fst-italic text-muted">Thai</td>
+                                </tr>
+                                <tr>
+                                    <td>eng</td>
+                                    <td class="fst-italic text-muted">English</td>
+                                </tr>
+                                <tr>
+                                    <td>zho</td>
+                                    <td class="fst-italic text-muted">Chinese (Mandarin)</td>
+                                </tr>
+                                <tr>
+                                    <td>san</td>
+                                    <td class="fst-italic text-muted">Sansakrit</td>
+                                </tr>
+                                <tr>
+                                    <td>pli</td>
+                                    <td class="fst-italic text-muted">Pali</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pb-3"></div>
+                        <h5 class="text-warning">IPA & TH Markups (ipa / th)</h5>
+                        <table class="table shadow">
+                            <thead>
+                                <tr>
+                                    <th>ipa/th</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td class="fst-italic text-muted">Mon Alphabet AI Generated</td>
+                                </tr>
+                                <tr>
+                                    <td>(og)</td>
+                                    <td class="fst-italic text-muted">Original pronunciation from Mahajaroon's Committee
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>(sn)</td>
+                                    <td class="fst-italic text-muted">Pronunciation from its synonym word</td>
+                                </tr>
+                                <tr>
+                                    <td>???</td>
+                                    <td class="fst-italic text-muted">Ambiguous word that left unresolved</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h5 class="text-info">Part of Speech (pos_code)</h5>
+                        <table class="table shadow">
+                            <thead>
+                                <tr>
+                                    <th>pos_code</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>n</td>
+                                    <td class="fst-italic text-muted">Noun</td>
+                                </tr>
+                                <tr>
+                                    <td>pron</td>
+                                    <td class="fst-italic text-muted">Pronoun</td>
+                                </tr>
+                                <tr>
+                                    <td>v</td>
+                                    <td class="fst-italic text-muted">Verb</td>
+                                </tr>
+                                <tr>
+                                    <td>adj</td>
+                                    <td class="fst-italic text-muted">Adjective</td>
+                                </tr>
+                                <tr>
+                                    <td>adv</td>
+                                    <td class="fst-italic text-muted">Adverb</td>
+                                </tr>
+                                <tr>
+                                    <td>num</td>
+                                    <td class="fst-italic text-muted">Numeral / Number</td>
+                                </tr>
+                                <tr>
+                                    <td>prep</td>
+                                    <td class="fst-italic text-muted">Preposition</td>
+                                </tr>
+                                <tr>
+                                    <td>conj</td>
+                                    <td class="fst-italic text-muted">Conjunction</td>
+                                </tr>
+                                <tr>
+                                    <td>intj</td>
+                                    <td class="fst-italic text-muted">Interjection</td>
+                                </tr>
+                                <tr>
+                                    <td>clf</td>
+                                    <td class="fst-italic text-muted">Classifier / Measure word</td>
+                                </tr>
+                                <tr>
+                                    <td>prefix</td>
+                                    <td class="fst-italic text-muted">Prefix</td>
+                                </tr>
+                                <tr>
+                                    <td>suffix</td>
+                                    <td class="fst-italic text-muted">Suffix</td>
+                                </tr>
+                                <tr>
+                                    <td>part</td>
+                                    <td class="fst-italic text-muted">Particle</td>
+                                </tr>
+                                <tr>
+                                    <td>pali</td>
+                                    <td class="fst-italic text-muted">Loan word from Pali</td>
+                                </tr>
+                                <tr>
+                                    <td>sansakrit</td>
+                                    <td class="fst-italic text-muted">Loan word from Sansakrit</td>
+                                </tr>
+                                <tr>
+                                    <td>tha</td>
+                                    <td class="fst-italic text-muted">Loan word from Thai</td>
+                                </tr>
+                                <tr>
+                                    <td>eng</td>
+                                    <td class="fst-italic text-muted">Loan word from English</td>
+                                </tr>
+                                <tr>
+                                    <td>Hynd</td>
+                                    <td class="fst-italic text-muted">Loan word from Hindi</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer class="mt-5 py-4 px-4 border">
@@ -296,14 +473,16 @@
                 </div>
                 <div class="col-12 col-md-12 col-lg-3 col-xl-4 mb-3 text-end">
                     <p>
-                        The Mon Language Dictionary Database
+                        MonDictDB
                         <br>
-                        Open Source: v1.8
+                        Open Source: v1.9
                     </p>
                     <p>
                         MIT License <br>
                         Copyright (c) 2025 Barnista
                     </p>
+                    <a class="btn btn-primary" href="https://github.com/Barnista/The-Mon-Language-Dictionary-Database"
+                        target="_blank">𖦥 Visit on GitHub</a>
                 </div>
             </div>
         </div>
@@ -311,6 +490,11 @@
     </footer>
 
     <!-- LOAD The Mon Language Database DATA -->
+    <script src="./assets/database/table_1.js"></script>
+    <script src="./assets/database/table_2.js"></script>
+    <script src="./assets/database/table_3.js"></script>
+    <script src="./assets/database/table_4.js"></script>
+    <script src="./assets/database/table_5.js"></script>
     <script src="./assets/database/author_1.js"></script>
     <script src="./assets/database/category_1.js"></script>
     <script src="./assets/database/categorydetail_1.js"></script>
@@ -343,7 +527,6 @@
     <script src="./assets/database/definition_24.js"></script>
 
     <!-- LOAD The Mon Language Database SERVICE -->
-    <script src="./services/db/tables.js"></script>
     <script src="./services/db/db.js"></script>
     <script src="./services/db/query.js"></script>
 

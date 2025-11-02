@@ -3,7 +3,6 @@ import services.dbconfig as dbconfig
 from classes.x_category_detail_crud import XCategoryDetailCRUD
 
 import asyncio
-import time
 import socket
 import services.google_translate as google_translate
 

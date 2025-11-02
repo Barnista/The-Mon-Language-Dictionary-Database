@@ -100,8 +100,8 @@ final_consonants = {
             'members': [
                 {
                     'consonant': 'ၚ',
-                    'final': 'င်',
-                    'final2': 'ၚ်',
+                    'final': 'ၚ်',
+                    'final2': 'င်',
                     'finalIPA': 'ŋ',
                     'finalTH': 'ง'
                 },

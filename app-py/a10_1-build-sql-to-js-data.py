@@ -5,18 +5,19 @@ import time
 
 #!/usr/bin/env python3
 """
-Read ../sql/data/definitions.sql and split out each INSERT INTO ...; statement
+Read ../sql/definitions.sql and split out each INSERT INTO ...; statement
 into its own JavaScript file. Each JS file contains a single string variable
 holding the INSERT statement and exports it (CommonJS).
 """
 
 # Paths (relative to this script)
 HERE = Path(__file__).parent.resolve()
-SRC_Author = (HERE / "../sql/data/Author.sql").resolve()
-SRC_Category = (HERE / "../sql/data/Category.sql").resolve()
-SRC_CategoryDetail = (HERE / "../sql/data/CategoryDetail.sql").resolve()
-SRC_Definition = (HERE / "../sql/data/Definition.sql").resolve()
-SRC_Word = (HERE / "../sql/data/Word.sql").resolve()
+SRC_Author = (HERE / "../sql/Author.sql").resolve()
+SRC_Category = (HERE / "../sql/Category.sql").resolve()
+SRC_CategoryDetail = (HERE / "../sql/CategoryDetail.sql").resolve()
+SRC_Definition = (HERE / "../sql/Definition.sql").resolve()
+SRC_Word = (HERE / "../sql/Word.sql").resolve()
+SRC_TABLES = (HERE / "../sql/sqlite_tables.sql").resolve()
 OUT_DIR = (HERE / "../docs/assets/database").resolve()
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -103,3 +104,31 @@ if not SRC_Word.exists():
 else:
     text = SRC_Word.read_text(encoding="utf-8")
     build_sql_js(text)
+
+
+def build_table_js(sql):
+    # Find all CREATE TABLE statements (non-greedy, DOTALL to span lines)
+    pattern = re.compile(r'(CREATE\s+TABLE\b.*?;)', re.IGNORECASE | re.DOTALL)
+    matches = pattern.findall(sql)
+    if not matches:
+        print("No CREATE TABLE statements found.", file=sys.stderr)
+        sys.exit(1)
+        # Helper to get a safe filename from the table name
+    # Extract table name and write file
+    for index, stmt in enumerate(matches):
+        # Clean up statement
+        value = stmt.replace("`", "")
+        value = value.replace("\\'", "'")
+        value = value.strip()
+        
+        # Write to single file
+        js_content = f"const DB_TABLES_{index+1} = `\n" + value + "\n`;\n"
+        table_file = OUT_DIR / f"table_{index+1}.js"
+        table_file.write_text(js_content, encoding="utf-8")
+
+if not SRC_TABLES.exists():
+    print(f"Source SQL tables file not found: {SRC_TABLES}", file=sys.stderr)
+    sys.exit(1)
+else:
+    text = SRC_TABLES.read_text(encoding="utf-8")
+    build_table_js(text)

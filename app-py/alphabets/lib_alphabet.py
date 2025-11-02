@@ -41,8 +41,8 @@ class LibAlphabet:
     def get_double_example_pali_sansakrit(self):
         return self.lib_double_consonant.get_example_pali_sansakrit()
 
-    def craft_word2(self, consonant, compound, vowel, final_consonant):
-        print('CRAFT WORD:', 'CON', consonant, 'COM', compound, 'VOW', vowel, 'FIN', final_consonant)
+    def craft_word2(self, consonant, compound, vowel, final_consonant, debug=False):
+        if debug: print('CRAFT WORD:', 'CON', consonant, 'COM', compound, 'VOW', vowel, 'FIN', final_consonant)
         ipa = {'consonant': '', 'compound': '', 'vowel': '', 'final': ''}
         ipa2 = {'consonant': '', 'compound': '', 'vowel': '', 'final': ''}
         th = {'consonant': '', 'compound': '', 'vowel': '', 'final': ''}
@@ -50,23 +50,37 @@ class LibAlphabet:
         word = {'consonant': '', 'compound': '', 'vowel': '', 'final': ''}
         word2 = {'consonant': '', 'compound': '', 'vowel': '', 'final': ''}
 
-        # If no consonant is provided, we use the default consonant
-        print('CONSONANT PROVIDED:', consonant)
-        current_consonant = self.lib_consonant.get_by_letter(consonant) if consonant else self.lib_consonant.get_by_letter('အ')
+        # EXCEPTIONAL RULE NOTICED BY Mr. Zuzarz 
+        if debug: print('TRY TO FIND EXCEPTIONAL RULE')
+        blend_exceptional = self.lib_rule.find_blend_compound_exceptional(consonant, compound, vowel, final_consonant)
+        if blend_exceptional:
+            consonant = blend_exceptional['consonant']
+            compound = blend_exceptional['compound']
+            vowel = blend_exceptional['vowel']
+            final_consonant = blend_exceptional['final_consonant']
 
-        # check if the consonant is breathy or clear
-        is_breathy = self.lib_rule.is_breathy_consonant(current_consonant['letter'])
-        cl_bt = 'bt' if is_breathy else 'cl'
+        # If no consonant is provided, we use the default consonant
+        current_consonant = self.lib_consonant.get_by_letter(consonant) if consonant else self.lib_consonant.get_by_letter('အ')
+        if debug: print('CONSONANT PROVIDED:', current_consonant)
+
+        #NOTICED BY Zuzarz
+        if blend_exceptional and blend_exceptional.get('is_breathy') is not None:
+            is_breathy = blend_exceptional['is_breathy']
+            cl_bt = 'bt' if is_breathy else 'cl'
+        else:
+            # check if the consonant is breathy or clear
+            is_breathy = self.lib_rule.is_breathy_consonant(current_consonant['letter'])
+            cl_bt = 'bt' if is_breathy else 'cl'
 
         # if no vowel is provided, we use the default vowel
         current_vowel = None
         if vowel:
-            print('VOWEL PROVIDED:', vowel)
+            if debug: print('VOWEL PROVIDED:', vowel)
             current_vowel = (self.lib_vowel.get_by_compound(vowel) or 
                            self.lib_vowel.get_by_letter(vowel) or 
                            self.vowels[0])
         else:
-            print('NO VOWEL PROVIDED, USING DEFAULT')
+            if debug: print('NO VOWEL PROVIDED, USING DEFAULT')
             current_vowel = self.vowels[0]
 
         # check if a certain vowel has to change its form
@@ -76,7 +90,7 @@ class LibAlphabet:
         # Continue with compound consonant processing...
         compound_consonant_data = self.lib_compound_consonant.get_by_compound(compound) if compound else None
         if compound_consonant_data:
-            print('COMPOUND CONSONANT PROVIDED:', compound)
+            if debug: print('COMPOUND CONSONANT PROVIDED:', compound)
             # append the compound consonant to the word
             word['consonant'] = current_consonant['letter']
             word['compound'] = compound_consonant_data['compound']
@@ -89,9 +103,10 @@ class LibAlphabet:
             blend_compound = self.lib_rule.find_blend_compound(compound, current_consonant['letter'])
 
             if blend_compound:
-                print('BLEND COMPOUND FOUND:', blend_compound)
+                if debug: print('BLEND COMPOUND FOUND:', blend_compound)
                 # if the compound consonant is a blend
                 if blend_compound.get('isReversed', False):
+                    if debug: print('BLEND COMPOUND IS REVERSED')
                     # swap consonants when reversed (e.g., blends with 'ဟ')
                     a = current_consonant
                     b = compound_consonant_data
@@ -111,18 +126,29 @@ class LibAlphabet:
                     ipa2['compound'] = compound_consonant_data.get('compoundIPA', '')
                     th2['consonant'] = (current_consonant.get('compoundTH', '') or '') + (compound_consonant_data.get('compoundTH', '') or '')
                     th2['compound'] = ''
+                else:
+                    if debug: print('BLEND COMPOUND IS NOT REVERSED')
+                    # normal blend: use the blend's IPA and TH directly
+                    ipa['consonant'] = current_consonant.get('compoundIPA', '')
+                    ipa['compound'] = compound_consonant_data.get('compoundIPA', '')
+                    th['consonant'] = current_consonant.get('compoundTH', '')
+                    th['compound'] = compound_consonant_data.get('compoundTH', '')
+                    ipa2['consonant'] = current_consonant.get('compoundIPA', '')
+                    ipa2['compound'] = compound_consonant_data.get('compoundIPA', '')
+                    th2['consonant'] = current_consonant.get('compoundTH', '')
+                    th2['compound'] = compound_consonant_data.get('compoundTH', '')
             else:
                 # not a true blend: treat as consonant + compound
-                ipa['consonant'] = current_consonant.get('ipa', '')
+                ipa['consonant'] = current_consonant.get('compoundIPA', '')
                 ipa['compound'] = compound_consonant_data.get('compoundIPA', '')
-                th['consonant'] = current_consonant.get('th', '')
+                th['consonant'] = current_consonant.get('compoundTH', '')
                 th['compound'] = compound_consonant_data.get('compoundTH', '')
-                ipa2['consonant'] = current_consonant.get('ipa', '')
+                ipa2['consonant'] = current_consonant.get('compoundIPA', '')
                 ipa2['compound'] = compound_consonant_data.get('compoundIPA', '')
-                th2['consonant'] = current_consonant.get('th', '')
+                th2['consonant'] = current_consonant.get('compoundTH', '')
                 th2['compound'] = compound_consonant_data.get('compoundTH', '')
         else:
-            print('NO COMPOUND CONSONANT PROVIDED')
+            if debug: print('NO COMPOUND CONSONANT PROVIDED')
             # no compound consonant provided; use current consonant defaults
             word['consonant'] = current_consonant.get('letter', '') if current_consonant else ''
             word2['consonant'] = current_consonant.get('letter', '') if current_consonant else ''
@@ -136,7 +162,7 @@ class LibAlphabet:
         final_consonant_data = self.lib_final_consonant.get_by_letter(final_consonant)
         final_consonant_group = self.lib_final_consonant.get_group_by_letter(final_consonant)
         if final_consonant_data and final_consonant_group:
-            print('FINAL CONSONANT PROVIDED:', final_consonant)
+            if debug: print('FINAL CONSONANT PROVIDED:', final_consonant)
             # try to analyse with vowels according to rules of finalWith and also with blendFinals.
             allowed_vowel = next((vowel for vowel in final_consonant_group['finalWith'] 
                                   if current_vowel['compound'] == vowel['vowel'] or 
@@ -187,7 +213,7 @@ class LibAlphabet:
                     ipa2['vowel'] = current_vowel['ipaCL2']
                     th2['vowel'] = current_vowel['thCL2']
         else:
-            print('NO FINAL CONSONANT PROVIDED OR NOT COMPATIBLE:', final_consonant)
+            if debug: print('NO FINAL CONSONANT PROVIDED OR NOT COMPATIBLE:', final_consonant)
             # if no final consonant data, we then skip to the next layer which is vowel
             word['vowel'] = vowel_compound
             ipa['vowel'] = current_vowel['ipaBT'] if is_breathy else current_vowel['ipaCL']
@@ -201,7 +227,7 @@ class LibAlphabet:
                 th2['vowel'] = current_vowel['thCL2']
 
         #print ipa
-        print('IPA:', ipa)
+        if debug: print('IPA:', ipa)
 
         # Convert JS blend TH checks to Python: if vowel and final present, apply blend replacement
         if th.get('vowel') and th.get('final'):
@@ -242,6 +268,7 @@ class LibAlphabet:
         # IPA composition: replace 'ʔ' in vowel with compound or consonant as needed
         vowel_ipa = ipa.get('vowel', '')
         if ipa.get('compound'):
+            if debug: print('COMPOUND IPA EXISTS:', ipa.get('compound'))
             result_ipa = (ipa.get('consonant', '') +
                          vowel_ipa.replace('ʔ', ipa.get('compound', '')))
         else:
@@ -260,8 +287,7 @@ class LibAlphabet:
         # TH composition: replace '-' in vowel with compound or consonant as needed
         vowel_th = th.get('vowel', '')
         if th.get('compound'):
-            result_th = (th.get('consonant', '') +
-                         vowel_th.replace('-', th.get('compound', '')))
+            result_th = (vowel_th.replace('-', th.get('consonant', '') + 'ฺ' + th.get('compound', '')))
         else:
             result_th = (vowel_th.replace('-', th.get('consonant', '')))
 
@@ -269,8 +295,7 @@ class LibAlphabet:
         if th2.get('vowel'):
             if th2.get('compound'):
                 # note: original JS used th.consonant here, preserve that behavior
-                result_th2 = (th2.get('consonant', '') +
-                              th2.get('vowel', '').replace('-', th2.get('compound', '')))
+                result_th2 = (th2.get('vowel', '').replace('-', th2.get('consonant', '') + 'ฺ' + th2.get('compound', '')))
             else:
                 result_th2 = (th2.get('vowel', '').replace('-', th2.get('consonant', '')))
         else:
@@ -287,7 +312,7 @@ class LibAlphabet:
             'th2': result_th2
         }
 
-    def analyse_text(self, text):
+    def analyse_text(self, text, debug=False):
         # Convert string to list of characters, filter out empty spaces
         chars = [c for c in (text or '') if c]
         
@@ -296,7 +321,6 @@ class LibAlphabet:
         word_finished = False
         index = 0
         length = len(chars)
-        print(f"CHARS: {chars} | LENGTH: {length}")
         
         while index < length:
             i_prev = index - 1
@@ -305,6 +329,8 @@ class LibAlphabet:
             char_prev = chars[i_prev] if i_prev >= 0 else None
             char_current = chars[index]
             char_next = chars[i_next] if i_next < length else None
+
+            if debug: print(f"PROCESSING INDEX: {index}, CHAR: {char_current}, PREV: {char_prev}, NEXT: {char_next}")
             
             # Classification checks
             is_consonant = self.lib_consonant.is_consonant(char_current)
@@ -318,9 +344,9 @@ class LibAlphabet:
             is_number_char = self.lib_numeral.is_number_char(char_current)
 
             if is_consonant:
-                print('is_consonant', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
+                if debug: print('is_consonant', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
                 # A. check if this char is registered as a consonant
-                print('INDEX:', i_prev, 'LENGTH:', i_next)
+                if debug: print('INDEX:', i_prev, 'LENGTH:', i_next)
                 if i_prev >= 0 and i_next < length:
                     # A-2 before register this consonant to the currentWord 
                     # we must try to analyse if this consonant is the last one in the currentWord
@@ -349,19 +375,19 @@ class LibAlphabet:
                             current_word += current_double_consonant['converts'][0]
 
                         # completed
-                        print('CLASSIFIED-A', char_current)
+                        if debug: print('CLASSIFIED-A', char_current)
                         if current_word:
                             memories.append(current_word)
                         current_word = '' + char_current
                     elif next_is_double_symbol and not next2_is_pali_sansakrit:
                         # in case we find the Direct double consonant
-                        print('CLASSIFIED-B', char_current)
+                        if debug: print('CLASSIFIED-B', char_current)
                         if current_word:
                             memories.append(current_word)
                         current_word = '' + char_current
                     elif not next_is_final_symbol and not next_is_double_symbol and not next2_is_pali_sansakrit and not next_is_compound:
                         # maybe the next char is vowel or consonant
-                        print('CLASSIFIED-C', char_current)
+                        if debug: print('CLASSIFIED-C', char_current)
                         if current_word:
                             memories.append(current_word)
                         current_word = '' + char_current
@@ -372,7 +398,7 @@ class LibAlphabet:
                         # there's some PaliSansakrit double consonants that disguise as a compound consonant
                         current_double_consonant2 = self.lib_double_consonant.get_by_pali_sansakrit2(char_current, char_next)
                         if current_double_consonant2:
-                            print('CLASSIFIED-D2', char_current)
+                            if debug: print('CLASSIFIED-D2', char_current)
                             current_word += current_double_consonant2['converts'][0]
                             char_next = current_double_consonant2['converts'][1]
 
@@ -383,18 +409,18 @@ class LibAlphabet:
                             word_finished = True
                             index += 1
                         else:
-                            print('CLASSIFIED-D1', char_current)
+                            if debug: print('CLASSIFIED-D1', char_current)
                             if current_word:
                                 memories.append(current_word)
                             current_word = '' + char_current
                     else:
-                        print('UNCLASSIFIED')
+                        if debug: print('UNCLASSIFIED')
                         current_word += char_current
                 else:
                     # if it's the last
                     # finish a word
                     if i_next >= length:
-                        print('CLASSIFIED-E', char_current)
+                        if debug: print('CLASSIFIED-E', char_current)
 
                         # there's some double consonants that disguise as a single consonant
                         current_double_consonant = self.lib_double_consonant.get_by_doubled(char_current)
@@ -409,7 +435,7 @@ class LibAlphabet:
                         # this char is the first (or the last) char in a text
                         current_word += char_current
             elif is_stand_alone_vowel:
-                print('is_stand_alone_vowel', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
+                if debug: print('is_stand_alone_vowel', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
                 # B. check if this char is registered as a stand alone vowel
                 # immediately register the currentWord into memories
                 # then start a new
@@ -417,7 +443,7 @@ class LibAlphabet:
                     memories.append(current_word)
                 current_word = '' + char_current
             elif is_compound_vowel:
-                print('is_compound_vowel', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
+                if debug: print('is_compound_vowel', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
                 # C. add it to the currentWord
                 current_word += char_current
                 # if it's the last
@@ -425,7 +451,7 @@ class LibAlphabet:
                 if i_next >= length:
                     word_finished = True
             elif is_compound_consonant:
-                print('is_compound_consonant', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
+                if debug: print('is_compound_consonant', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
                 # D. add it to the currentWord
                 current_word += char_current
 
@@ -434,35 +460,42 @@ class LibAlphabet:
                 if i_next >= length:
                     word_finished = True
             elif is_double_symbol:
-                print('is_double_symbol', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
+                if debug: print('is_double_symbol', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
                 # E. let's try to check if it's 
                 # -----a. Compound consonant
                 # -----b. PaliSansakrit double consonant
                 # -----c. Direct double consonant
                 a_is_compound_consonant = self.lib_compound_consonant.is_compound_consonant2(char_prev, char_next)
                 a_is_pali_sansakrit = self.lib_double_consonant.is_double_consonant2(char_prev, char_next)
+                blend_compound = self.lib_rule.find_blend_compound_exceptional(char_prev, char_current+char_next, None, None)
 
+                if blend_compound:
+                    if debug: print('CLASSIFIED-D-EXCEPTION', char_current, char_next)
+                    # it's a blend compound consonant according to exceptional rule
+                    current_word += blend_compound['consonant'] + blend_compound['compound']
+                    index += 1
                 if a_is_pali_sansakrit:
-                    print('CLASSIFIED-F', char_current, char_next)
+                    if debug: print('CLASSIFIED-F', char_current, char_next)
                     # it's 2 words according to Pali-Sansakrit rule
                     current_word += self.lib_final_consonant.final_symbol
                     word_finished = True
                 elif a_is_compound_consonant:
                     # move on to the next +2 index
+                    if debug: print('CLASSIFIED-G', char_current, char_next)
                     current_word += char_current + char_next
                     index += 1
                 else:
+                    if debug: print('CLASSIFIED-H', char_current, char_next)
                     # it's 2 words according to Direct rule
                     word_finished = True
-
             elif is_final_symbol:
-                print('is_final_symbol', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
+                if debug: print('is_final_symbol', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
                 # F. the prev consonant is the final consonant, thus the current word is completed. 
                 current_word += char_current
 
                 # however there might be some exception if the next char is some kind of final2 symbol
-                next_blend_final = char_current + char_next
-                prev_blend_final = char_current + char_prev
+                next_blend_final = (char_current or '') + (char_next or '')
+                prev_blend_final = (char_current or '') + (char_prev or '')
                 next_is_final2_symbol = self.lib_final_consonant.is_final2_symbol(next_blend_final)
                 prev_is_final2_symbol = self.lib_final_consonant.is_final2_symbol(prev_blend_final)
                 prev_is_compound_symbol = self.lib_compound_consonant.is_compound_consonant(char_prev)
@@ -474,8 +507,8 @@ class LibAlphabet:
 
                 # v1.7.2 check if there's a double final consonant, if true that means it's a repetition word (same as "ๆ" in Thai)
                 next_char_next2 = chars[i_next + 1] if i_next + 1 < length else ''
-                current_final = char_prev + char_current
-                next_same_final = char_next + next_char_next2
+                current_final = (char_prev or '') + (char_current or '')
+                next_same_final = (char_next or '') + (next_char_next2 or '')
                 if current_final == next_same_final:
                     # skip 2 step
                     index += 2
@@ -484,24 +517,22 @@ class LibAlphabet:
                         memories.append(current_word)
                     # then let the same word get added later
                     word_finished = True
-
             elif is_final2_symbol:
-                print('is_final2_symbol', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
+                if debug: print('is_final2_symbol', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
                 # G. the current consonant is the final consonant that blends itself with some vowel
                 current_word += char_current
-
             elif double_consonant:
-                print('is_double_consonant', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
+                if debug: print('is_double_consonant', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
                 # H. the current consonant is a special double consonant
                 # this is a special case, we have to check if it's a PaliSansakrit double consonant
-                print('DOUBLE-CONSONANT', char_current)
+                if debug: print('DOUBLE-CONSONANT', char_current)
                 current_word += double_consonant['converts'][0]
                 if current_word:
                     memories.append(current_word)
 
                 current_word = '' + double_consonant['converts'][1]
             elif is_number_char:
-                print('is_number_char', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
+                if debug: print('is_number_char', 'CURRENT:', char_current, 'PREV:', char_prev, 'NEXT:', char_next)
                 # v1.7.4 numeral recognition
                 is_next_char_number = self.lib_numeral.is_number_char(char_next)
                 is_next_char_num_symbol = self.lib_numeral.is_symbol(char_next)
@@ -528,11 +559,11 @@ class LibAlphabet:
             else:
                 # maybe it was some spacing or punctuations, or untrained characters
                 word_finished = True
-                print('INVALID CHAR:', char_current)
+                if debug: print('INVALID CHAR:', char_current)
 
             # Handle word completion
             if word_finished or index >= length - 1:
-                print('WORD FINISHED:', current_word)
+                if debug: print('WORD FINISHED:', current_word)
                 if current_word:
                     memories.append(current_word)
                 current_word = ''
@@ -551,7 +582,7 @@ class LibAlphabet:
         
         for i in range(len(memories)):
             word = memories[i]
-            craft = self.analyse_single_word(word)
+            craft = self.analyse_single_word(word, debug=debug)
             # re-assign value in case there's a better option from analysed word
             memories[i] = craft['word']
             analysed.append(craft)
@@ -570,8 +601,8 @@ class LibAlphabet:
 
             #ipa += n_ipa + ('-' if i < len(memories) - 1 else '')
             #th += n_th + ('-' if i < len(memories) - 1 else '')
-            ipa += n_ipa + ('' if i < len(memories) - 1 else '')
-            th += n_th + ('' if i < len(memories) - 1 else '')
+            ipa += n_ipa + ('-' if i < len(memories) - 1 else '')
+            th += n_th + ('-' if i < len(memories) - 1 else '')
 
             # collect all possible ipa & th
             tempIpa = []
@@ -604,7 +635,8 @@ class LibAlphabet:
             'deconstructs': chars
         }
 
-    def analyse_single_word(self, word):
+    def analyse_single_word(self, word, debug=False):
+        if debug: print('ANALYSING SINGLE WORD:', word)
         # convert string to list of characters, filter out empty spaces
         chars = [c for c in (word or '')]
         chars = [c for c in chars if c]
@@ -646,6 +678,7 @@ class LibAlphabet:
 
                 consonant = self.lib_consonant.get_by_letter(char_current)
                 compound = self.lib_compound_consonant.get_by_compound(char_current)
+                double_symbol = self.lib_double_consonant.is_double_symbol(char_current)
                 vowel = self.lib_vowel.get_by_compound(char_current)
                 stand_alone_vowel = self.lib_vowel.get_by_letter(char_current)
                 final_consonant = self.lib_final_consonant.get_by_letter(char_current)
@@ -653,23 +686,21 @@ class LibAlphabet:
                 final2_symbol = self.lib_final_consonant.is_final2_symbol(char_current)
 
                 if consonant:
-                    if i_prev >= 0 and i_next < length:
+                    if debug: print('CONSONANT FOUND:', char_current)
+                    if i_prev >= 0 and i_next <= length:
                         next_is_final_symbol = self.lib_final_consonant.is_final_symbol(char_next)
-                        prev_is_double_symbol = self.lib_double_consonant.is_double_symbol(char_prev)
-                        if prev_is_double_symbol:
-                            # it's the compound consonant
-                            if compound:
-                                word_structure['compound'] = compound.get('letter') if isinstance(compound, dict) else getattr(compound, 'letter', '')
-                        elif next_is_final_symbol:
+                        if next_is_final_symbol:
                             # it's the final consonant (combined char_current + char_next)
                             word_structure['final'] = (char_current or '') + (char_next or '')
                             index += 1
                     else:
+                        print('SINGLE CHAR CONSONANT FOUND:', char_current)
                         if index == 0:
                             # first char means it's really a consonant
                             word_structure['consonant'] = consonant.get('letter') if isinstance(consonant, dict) else getattr(consonant, 'letter', '')
                         # if it's the last char, ignore (incomplete word)
                 elif compound:
+                    if debug: print('COMPOUND CONSONANT FOUND:', char_current)
                     # some final consonant can disguise itself as a compound symbol
                     next_blend_final = (char_current or '') + (char_next or '')
                     prev_blend_final = (char_current or '') + (char_prev or '')
@@ -685,7 +716,12 @@ class LibAlphabet:
                         word_structure['compound'] = compound.get('compound') if isinstance(compound, dict) else getattr(compound, 'compound', '')
                     else:
                         word_structure['final'] = compound.get('letter') if isinstance(compound, dict) else getattr(compound, 'letter', '')
+                elif double_symbol:
+                    # it's the compound consonant
+                    if debug: print('DOUBLE SYMBOL FOUND IN SINGLE WORD ANALYSIS - IGNORED:', char_current)
+                    word_structure['compound'] = char_current+(char_next or '')
                 elif stand_alone_vowel:
+                    if debug: print('STAND-ALONE VOWEL FOUND:', char_current)
                     word_structure['vowel'] = stand_alone_vowel.get('letter') if isinstance(stand_alone_vowel, dict) else getattr(stand_alone_vowel, 'letter', '')
                     # assign the next vowel into vowel and skip the next index if present
                     next_vowel = self.lib_vowel.get_by_compound(char_next)
@@ -717,7 +753,8 @@ class LibAlphabet:
                 word_structure.get('consonant', ''),
                 word_structure.get('compound', ''),
                 word_structure.get('vowel', ''),
-                word_structure.get('final', '')
+                word_structure.get('final', ''),
+                debug=debug
             )
 
             return {
@@ -737,7 +774,7 @@ class LibAlphabet:
 
             for char in arrays[depth]:
                 #new_current = current + ('-' if current else '') + char
-                new_current = current + ("" if current else '') + char
+                new_current = current + ("-" if current else '') + char
                 helper(new_current, depth + 1)
 
         helper('', 0)
