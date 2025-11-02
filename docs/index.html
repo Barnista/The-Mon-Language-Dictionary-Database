@@ -4,6 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="MonDictDB - Open-source Mon language dictionary database with 26,199 words and 77,622 definitions supporting Mon-English, Mon-Thai, and Mon-Burmese translations.">
+    <meta name="keywords"
+        content="Mon language, dictionary, database, translations, Mon-English, Mon-Thai, Mon-Burmese, MonDictDB">
+    <meta name="author" content="Barnista">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="MonDictDB — Docs & Demo">
+    <meta property="og:description"
+        content="Open-source Mon language dictionary database with comprehensive translations and definitions">
+    <meta property="og:type" content="website">
+
     <title>MonDictDB — Docs & Demo</title>
     <!-- LOAD sql.js v1.13.0 for SQLite web-based engine-->
     <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
@@ -47,7 +58,7 @@
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">MonDictDB</h5>
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">MonDictDB — Docs & Demo</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
@@ -60,25 +71,47 @@
                             <a class="nav-link" href="https://github.com/Barnista/The-Mon-Language-Dictionary-Database"
                                 target="_blank">𖦥 Visit on GitHub</a>
                         </li>
-                        <!--<li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>-->
                     </ul>
-                    <!--<form class="d-flex mt-3" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button class="btn btn-success" type="submit">Search</button>
-                    </form>-->
+                    <hr>
+                    <ul class="navbar-nav pe-3">
+                        <li>
+                            <h6 class="mt-3">Tools Required:</h6>
+                        </li>
+                        <li><a class="nav-link" href="https://www.w3schools.com/" target="_blank">🚀 HTML5/CSS/JS</a>
+                        </li>
+                        <li><a class="nav-link" href="https://github.com/sql-js/sql.js" target="_blank">🚀 SQL.js
+                                v1.13.0</a></li>
+                        <li><a class="nav-link" href="https://datatables.net/" target="_blank">🚀 DataTable.js
+                                v2.3.4</a></li>
+                        <li><a class="nav-link" href="https://highlightjs.org/" target="_blank">🚀 Hilight.js
+                                v11.11.1</a></li>
+                        <li><a class="nav-link" href="https://jquery.com/" target="_blank">🚀 jQuery v3.7.1</a></li>
+                        <li><a class="nav-link" href="https://getbootstrap.com/" target="_blank">🚀 Bootstrap v5.3.8</a>
+                        </li>
+
+                        <li>
+                            <h6 class="mt-3">Contributors:</h6>
+                        </li>
+                        <li><a class="nav-link" href="#">👨🏻 Nai Sac Lun - Mon-Burmese Dictionary Compiler</a></li>
+                        <li><a class="nav-link" href="#">👨‍🦲 Mahajaroon's Committee - Mon-Thai Dictionary Compiler</a>
+                        </li>
+                        <li><a class="nav-link" href="https://github.com/Barnista" target="_blank">👨🏻‍💻 Tummanoon
+                                Wanchaem (Barnista) - Lead Project</a></li>
+                        <li><a class="nav-link" href="https://github.com/NaiSaikChan" target="_blank">👨🏻‍💻 Nai Saik
+                                Chan - Co-developer</a></li>
+                        <li><a class="nav-link" href="https://github.com/iammon" target="_blank">👨🏻‍💻 Htaw Mon -
+                                Co-developer</a></li>
+                        <li><a class="nav-link" href="https://github.com/Anontamon" target="_blank">👨🏻‍💻 Anonta Mon -
+                                Co-developer</a></li>
+                    </ul>
+                    <hr>
+                    <ul class="navbar-nav pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" target="_blank">
+                                MIT License, Copyright (c) 2025 Barnista.
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -87,7 +120,7 @@
     <div class="mt-5 pt-4 px-4">
         <div class="row mt-4">
             <div class="col-12 col-md-6 col-xl-5 mb-3">
-                <h1>Web Demo (using SQL.js)</h1>
+                <h1>Web Demo (for developer)</h1>
                 <p class="muted">Interactive demo showing how to manage an open-source & centralized dictionary database
                     of
                     The Mon Language using SQL commands to create,
@@ -96,11 +129,11 @@
                     WebAssembly aka. WASM. (Can be used as offline database).</p>
                 <div class="row">
                     <div class="col-12 col-md-12 col-lg-4 text-center mb-3">
-                        <img src="./assets/logo128.png" style="max-width: 128px; max-height: 128px;">
-                        <small class="d-block text-muted">Logo 128x128</small>
+                        <img src="./assets/logo256.png" class="p-5 p-lg-2 w-100 h-auto">
+                        <small class="d-block text-muted">Logo 256x256</small>
                     </div>
                     <div class="col-12 col-md-12 col-lg-8 mb-3">
-                        <h5>Version 1.9</h5>
+                        <h5>Version 1.10</h5>
                         <ul>
                             <li>
                                 🛢️ Support SQLite and MySQL:
@@ -235,13 +268,81 @@
     <div class="pt-4 px-4">
         <div class="row">
             <div class="col-12 col-xl-7 mb-5">
+                <h3>🛕 Architecture</h3>
+                <p>
+                    MonDictDB is an open-source Mon language dictionary database combined majorly from Nai Sac Lun's
+                    Mon-Burmese Dictionary and Mahajaroon's Committee' Mon-Thai Dictionary.
+                    We've implemented various automation algorithm using Python and MySQL to enrich, data cleanse, and
+                    compile into various end-products aimed to support most SQL database engine by using SQLite as
+                    baseline.
+                    This is also beneficial for developers who're looking for offline or in-app database.
+                </p>
+                <img src="./assets/imgs/architecture.jpg" class="w-100 h-auto shadow">
+            </div>
+            <div class="col-12 col-xl-5 mb-5">
+                <h3>❤️ Main users of MonDictDB</h3>
+                <p>
+                    MonDictDB is leveraged by various dictionary apps that serve over 10,000+ Mon users. Here are the
+                    main projects that have adopted MonDictDB as their primary database:
+                </p>
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table shadow">
+                            <thead>
+                                <tr>
+                                    <th>Project</th>
+                                    <th>URL</th>
+                                    <th>Developer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="fw-bold">The Mon Language (မန်)</td>
+                                    <td class="fst-italic text-muted">
+                                        <a href="https://the-mon-language.web.app"
+                                            target="_blank">the-mon-language.web.app</a>
+                                    </td>
+                                    <td>Barnista</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">A Ar Dictionary</td>
+                                    <td class="fst-italic text-muted">
+                                        <a href="https://www.aarmon.app" target="_blank">www.aarmon.app</a>
+                                    </td>
+                                    <td>Nai Saik Chan</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Mon Dictionary ORG</td>
+                                    <td class="fst-italic text-muted">
+                                        <a href="https://www.mondictionary.org"
+                                            target="_blank">www.mondictionary.org</a>
+                                    </td>
+                                    <td>Htaw Mon</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">More is coming...</td>
+                                    <td class="fst-italic text-muted">
+                                        from your ideas.
+                                    </td>
+                                    <td>You make it.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pt-4 px-4">
+        <div class="row">
+            <div class="col-12 col-xl-7 mb-5">
                 <h3>📐 Database Design</h3>
                 <p>
                     MonDictDB design has been simplified and redesigned by Barnista; derived
                     from Nai
                     Saik Chan's A Ar dictionary database.
                 </p>
-                <img src="./assets/imgs/database-design.jpg" class="w-100 h-auto">
+                <img src="./assets/imgs/database-design.jpg" class="w-100 h-auto shadow">
             </div>
             <div class="col-12 col-xl-5 mb-5">
                 <h3>📄 Metadata</h3>
@@ -475,7 +576,7 @@
                     <p>
                         MonDictDB
                         <br>
-                        Open Source: v1.9
+                        Open Source: v1.10
                     </p>
                     <p>
                         MIT License <br>
