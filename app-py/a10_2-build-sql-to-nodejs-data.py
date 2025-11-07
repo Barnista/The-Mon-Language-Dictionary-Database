@@ -63,10 +63,11 @@ def build_sql_js(sql):
         # By removing ` and replacing \'s
         value = stmt.replace("`", "")
         value = value.replace("\\'", "’")
+        value = value.replace("\n", "")
         value = value.strip()
         # Prepare JS content: const sql = `...`; module.exports = sql;
         #js_content = f"const DB_DATA_{name.upper()}_{count} = `\n" + value + "\n`;\n\nmodule.exports = sql;\n"
-        js_content = f"export const DB_DATA_{name.upper()}_{count} = `\n" + value + "\n`;\n"
+        js_content = f"/* eslint-disable no-useless-escape */ export const DB_DATA_{name.upper()}_{count} = `" + value + "`; /* eslint-disable no-useless-escape */"
 
         filename.write_text(js_content, encoding="utf-8")
     print(f"Wrote {len(matches)} files to: {OUT_DIR}")
@@ -119,10 +120,11 @@ def build_table_js(sql):
         # Clean up statement
         value = stmt.replace("`", "")
         value = value.replace("\\'", "'")
+        value = value.replace("\n", "")
         value = value.strip()
         
         # Write to single file
-        js_content = f"export const DB_TABLES_{index+1} = `\n" + value + "\n`;\n"
+        js_content = f"/* eslint-disable no-useless-escape */ export const DB_TABLES_{index+1} = `" + value + "`; /* eslint-disable no-useless-escape */"
         table_file = OUT_DIR / f"table_{index+1}.js"
         table_file.write_text(js_content, encoding="utf-8")
 
