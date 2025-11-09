@@ -158,7 +158,7 @@ def partition_lines(lines, size):
         parts.append(lines[600:])
         # 2 parts
     else:
-        parts.append(lines)
+        parts.append(lines[1:])
         # 1 part
     return parts
 

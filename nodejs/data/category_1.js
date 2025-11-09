@@ -1,6 +1,5 @@
 /* eslint-disable no-useless-escape */ 
 export const DB_DATA_CATEGORY_1 = `INSERT INTO Category (id, parent_category_id, name, created_at, author_id) VALUES
-INSERT INTO Category (id, parent_category_id, name, created_at, author_id) VALUES
 (1,	NULL,	'Living Beings',	'2025-10-26 07:17:59',	1),
 (2,	NULL,	'Inanimate Objects/Things',	'2025-10-26 07:17:59',	1),
 (3,	NULL,	'Nature & Phenomena',	'2025-10-26 07:18:00',	1),

@@ -1,6 +1,5 @@
 /* eslint-disable no-useless-escape */ 
 export const DB_DATA_AUTHOR_1 = `INSERT INTO Author (id, name, bio) VALUES
-INSERT INTO Author (id, name, bio) VALUES
 (1,	'Nai Sac Lun',	'Mon-Burmese Dictionary Compiler.'),
 (2,	'Mahajaroon’s Committee',	'Mon-Thai Dictionary Compiler.'),
 (3,	'Nai Sac Lun and Mahajaroon’s Committee',	'Nai Sac Lun and Mahajaroon’s Committee combination.'),

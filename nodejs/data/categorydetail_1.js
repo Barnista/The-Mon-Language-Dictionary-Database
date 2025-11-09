@@ -1,6 +1,5 @@
 /* eslint-disable no-useless-escape */ 
 export const DB_DATA_CATEGORYDETAIL_1 = `INSERT INTO CategoryDetail (id, category_id, label, description, created_at, author_id, lang_code) VALUES
-INSERT INTO CategoryDetail (id, category_id, label, description, created_at, author_id, lang_code) VALUES
 (271,	1,	'Living Beings',	NULL,	'2025-10-26 07:17:59',	1,	'eng'),
 (272,	1,	'သက်ရှိများ',	NULL,	'2025-10-26 07:17:59',	1,	'mya'),
 (273,	1,	'သတ်မၞုံလမျီု',	NULL,	'2025-10-26 07:17:59',	1,	'mnw'),
