@@ -18,10 +18,149 @@ SRC_CategoryDetail = (HERE / "../sql/CategoryDetail.sql").resolve()
 SRC_Definition = (HERE / "../sql/Definition.sql").resolve()
 SRC_Word = (HERE / "../sql/Word.sql").resolve()
 SRC_TABLES = (HERE / "../sql/sqlite_tables.sql").resolve()
-OUT_DIR = (HERE / "../nodejs/database").resolve()
+OUT_DIR = (HERE / "../nodejs/data").resolve()
 OUT_DIR.mkdir(parents=True, exist_ok=True)
-OUT_DIR_TABLE = (HERE / "../nodejs/database").resolve()
+OUT_DIR_TABLE = (HERE / "../nodejs/table").resolve()
 OUT_DIR_TABLE.mkdir(parents=True, exist_ok=True)
+OUT_DIR_ROOT = (HERE / "../nodejs").resolve()
+OUT_DIR_TABLE.mkdir(parents=True, exist_ok=True)
+
+def partition_lines(lines, size):
+    parts = list()
+    if size >= 7800:
+        # 7 parts
+        parts.append(lines[1:600])
+        parts.append(lines[600:1200])
+        parts.append(lines[1200:1800])
+        parts.append(lines[1800:2400])
+        parts.append(lines[2400:3000])
+        parts.append(lines[3000:3600])
+        parts.append(lines[3600:4200])
+        parts.append(lines[4200:4800])
+        parts.append(lines[4800:5400])
+        parts.append(lines[5400:6000])
+        parts.append(lines[6000:6600])
+        parts.append(lines[6600:7200])
+        parts.append(lines[7200:7800])
+        parts.append(lines[7800:])
+    elif size >= 7200:
+        # 7 parts
+        parts.append(lines[1:600])
+        parts.append(lines[600:1200])
+        parts.append(lines[1200:1800])
+        parts.append(lines[1800:2400])
+        parts.append(lines[2400:3000])
+        parts.append(lines[3000:3600])
+        parts.append(lines[3600:4200])
+        parts.append(lines[4200:4800])
+        parts.append(lines[4800:5400])
+        parts.append(lines[5400:6000])
+        parts.append(lines[6000:6600])
+        parts.append(lines[6600:7200])
+        parts.append(lines[7200:])
+    elif size >= 6600:
+        # 7 parts
+        parts.append(lines[1:600])
+        parts.append(lines[600:1200])
+        parts.append(lines[1200:1800])
+        parts.append(lines[1800:2400])
+        parts.append(lines[2400:3000])
+        parts.append(lines[3000:3600])
+        parts.append(lines[3600:4200])
+        parts.append(lines[4200:4800])
+        parts.append(lines[4800:5400])
+        parts.append(lines[5400:6000])
+        parts.append(lines[6000:6600])
+        parts.append(lines[6600:])
+    elif size >= 6000:
+        # 7 parts
+        parts.append(lines[1:600])
+        parts.append(lines[600:1200])
+        parts.append(lines[1200:1800])
+        parts.append(lines[1800:2400])
+        parts.append(lines[2400:3000])
+        parts.append(lines[3000:3600])
+        parts.append(lines[3600:4200])
+        parts.append(lines[4200:4800])
+        parts.append(lines[4800:5400])
+        parts.append(lines[5400:6000])
+        parts.append(lines[6000:])
+    elif size >= 5400:
+        # 7 parts
+        parts.append(lines[1:600])
+        parts.append(lines[600:1200])
+        parts.append(lines[1200:1800])
+        parts.append(lines[1800:2400])
+        parts.append(lines[2400:3000])
+        parts.append(lines[3000:3600])
+        parts.append(lines[3600:4200])
+        parts.append(lines[4200:4800])
+        parts.append(lines[4800:5400])
+        parts.append(lines[5400:])
+    elif size >= 4800:
+        # 7 parts
+        parts.append(lines[1:600])
+        parts.append(lines[600:1200])
+        parts.append(lines[1200:1800])
+        parts.append(lines[1800:2400])
+        parts.append(lines[2400:3000])
+        parts.append(lines[3000:3600])
+        parts.append(lines[3600:4200])
+        parts.append(lines[4200:4800])
+        parts.append(lines[4800:])
+    elif size >= 4200:
+        # 7 parts
+        parts.append(lines[1:600])
+        parts.append(lines[600:1200])
+        parts.append(lines[1200:1800])
+        parts.append(lines[1800:2400])
+        parts.append(lines[2400:3000])
+        parts.append(lines[3000:3600])
+        parts.append(lines[3600:4200])
+        parts.append(lines[4200:])
+    elif size >= 3600:
+        # 7 parts
+        parts.append(lines[1:600])
+        parts.append(lines[600:1200])
+        parts.append(lines[1200:1800])
+        parts.append(lines[1800:2400])
+        parts.append(lines[2400:3000])
+        parts.append(lines[3000:3600])
+        parts.append(lines[3600:])
+    elif size >= 3000:
+        # 6 parts
+        parts.append(lines[1:600])
+        parts.append(lines[600:1200])
+        parts.append(lines[1200:1800])
+        parts.append(lines[1800:2400])
+        parts.append(lines[2400:3000])
+        parts.append(lines[3000:])
+    elif size >= 2400:
+        # 5 parts
+        parts.append(lines[1:600])
+        parts.append(lines[600:1200])
+        parts.append(lines[1200:1800])
+        parts.append(lines[1800:2400])
+        parts.append(lines[2400:])
+    elif size >= 1800:
+        # 4 parts
+        parts.append(lines[1:600])
+        parts.append(lines[600:1200])
+        parts.append(lines[1200:1800])
+        parts.append(lines[1800:])
+    elif size >= 1200:
+        parts.append(lines[1:600])
+        parts.append(lines[600:1200])
+        parts.append(lines[1200:])
+        # 3 parts
+    elif size >= 600:
+        parts.append(lines[1:600])
+        parts.append(lines[600:])
+        # 2 parts
+    else:
+        parts.append(lines)
+        # 1 part
+    return parts
 
 def build_sql_js(sql):
     # Find all INSERT ... ; sequences (non-greedy, DOTALL to span lines)
@@ -50,26 +189,35 @@ def build_sql_js(sql):
         else:
             name = f"unknown_{idx}"
 
-        # ensure unique filename
-        count = table_counts.get(name, 0) + 1
-        table_counts[name] = count
-        #filename = f"{idx:03d}_{name}"
-        filename = f"{name}"
-        if count > 0:
-            filename = f"{filename}_{count}"
-        filename = OUT_DIR / (filename + ".js")
-
         # Data cleansing to avoid causing bugs on sql.js
         # By removing ` and replacing \'s
         value = stmt.replace("`", "")
         value = value.replace("\\'", "’")
-        value = value.replace("\n", "")
         value = value.strip()
-        # Prepare JS content: const sql = `...`; module.exports = sql;
-        #js_content = f"const DB_DATA_{name.upper()}_{count} = `\n" + value + "\n`;\n\nmodule.exports = sql;\n"
-        js_content = f"/* eslint-disable no-useless-escape */ export const DB_DATA_{name.upper()}_{count} = `" + value + "`; /* eslint-disable no-useless-escape */"
 
-        filename.write_text(js_content, encoding="utf-8")
+        #Optiomize the value down from 1mb to 250kb by partitioning
+        lines = value.split('\n')
+        sql_command = lines[0]
+        size = len(lines)
+        parts = partition_lines(lines, size)
+
+        for i, pt in enumerate(parts):
+            # Prepare JS content
+            value = sql_command + '\n'
+            value = value + "\n".join(pt)
+
+            # ensure unique filename
+            count = table_counts.get(name, 0) + 1
+            table_counts[name] = count
+            #filename = f"{idx:03d}_{name}"
+            filename = f"{name}"
+            if count > 0:
+                filename = f"{filename}_{count}"
+            filename = OUT_DIR / (filename + ".js")
+
+            js_content = f"/* eslint-disable no-useless-escape */ \nexport const DB_DATA_{name.upper()}_{count} = `" + value + "`;\n /* eslint-disable no-useless-escape */"
+            filename.write_text(js_content, encoding="utf-8")
+
     print(f"Wrote {len(matches)} files to: {OUT_DIR}")
 
 
@@ -125,7 +273,7 @@ def build_table_js(sql):
         
         # Write to single file
         js_content = f"/* eslint-disable no-useless-escape */ export const DB_TABLES_{index+1} = `" + value + "`; /* eslint-disable no-useless-escape */"
-        table_file = OUT_DIR / f"table_{index+1}.js"
+        table_file = OUT_DIR_TABLE / f"table_{index+1}.js"
         table_file.write_text(js_content, encoding="utf-8")
 
 if not SRC_TABLES.exists():
@@ -134,3 +282,5 @@ if not SRC_TABLES.exists():
 else:
     text = SRC_TABLES.read_text(encoding="utf-8")
     build_table_js(text)
+
+
