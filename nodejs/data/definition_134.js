@@ -599,5 +599,5 @@ export const DB_DATA_DEFINITION_134 = `INSERT INTO Definition (id, word_id, lang
 (99129,	29897,	'mya',	'n',	NULL,	'အပြန်အလှန်လဲလှယ်စကားလုံး',	NULL,	'2025-10-27 22:57:59',	7),
 (99130,	29897,	'eng',	'n',	NULL,	'Interchangeable words',	NULL,	'2025-10-27 22:57:59',	7),
 (99131,	29897,	'eng',	'n',	NULL,	'words with the same meaning',	NULL,	'2025-10-27 22:57:59',	7),
-(99132,	29897,	'mya',	'n',	NULL,	'အဓိပ္ပါယ်တူစကား',	NULL,	'2025-10-27 22:58:00',	7),`;
+(99132,	29897,	'mya',	'n',	NULL,	'အဓိပ္ပါယ်တူစကား',	NULL,	'2025-10-27 22:58:00',	7)`;
  /* eslint-disable no-useless-escape */

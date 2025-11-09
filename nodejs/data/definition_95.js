@@ -599,5 +599,5 @@ export const DB_DATA_DEFINITION_95 = `INSERT INTO Definition (id, word_id, lang_
 (77881,	1930,	'eng',	'v',	NULL,	'He walked over and over again. Rolling back and forth.',	NULL,	'2025-10-26 21:14:39',	7),
 (77882,	1930,	'tha',	'v',	NULL,	'เขาเดินซ้ำแล้วซ้ำเล่า กลิ้งไปมา.',	NULL,	'2025-10-26 21:14:39',	7),
 (77883,	11619,	'eng',	'n',	NULL,	'He is a bastard. A man without grace.',	NULL,	'2025-10-26 21:14:45',	7),
-(77884,	11619,	'tha',	'n',	NULL,	'เขาเป็นคนนอกรีต ชายผู้ไม่มีพระคุณ.',	NULL,	'2025-10-26 21:14:45',	7),`;
+(77884,	11619,	'tha',	'n',	NULL,	'เขาเป็นคนนอกรีต ชายผู้ไม่มีพระคุณ.',	NULL,	'2025-10-26 21:14:45',	7)`;
  /* eslint-disable no-useless-escape */

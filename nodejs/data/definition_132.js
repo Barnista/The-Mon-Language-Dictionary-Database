@@ -599,5 +599,5 @@ export const DB_DATA_DEFINITION_132 = `INSERT INTO Definition (id, word_id, lang
 (97929,	29192,	'mya',	'n',	NULL,	'piphat ဂီတတူရိယာ',	NULL,	'2025-10-27 19:02:22',	7),
 (97930,	29192,	'eng',	'n',	NULL,	'xylophone',	NULL,	'2025-10-27 19:02:22',	7),
 (97931,	29192,	'eng',	'n',	NULL,	'Piphat musical instrument',	NULL,	'2025-10-27 19:02:22',	7),
-(97932,	29193,	'mya',	'n',	NULL,	'alyte',	NULL,	'2025-10-27 19:02:33',	7),`;
+(97932,	29193,	'mya',	'n',	NULL,	'alyte',	NULL,	'2025-10-27 19:02:33',	7)`;
  /* eslint-disable no-useless-escape */

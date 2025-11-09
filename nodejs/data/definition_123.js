@@ -598,5 +598,5 @@ export const DB_DATA_DEFINITION_123 = `INSERT INTO Definition (id, word_id, lang
 (92846,	13945,	'eng',	'v',	NULL,	'Enmity. hold a grudge.',	'‘ဒတောဝ်ဝဲ’ ရှု။',	'2025-10-27 10:02:03',	7),
 (92847,	13945,	'tha',	'v',	NULL,	'ความเป็นปฏิปักษ์ ถือความแค้น',	'‘ဒတောဝ်ဝဲ’ ရှု။',	'2025-10-27 10:02:04',	7),
 (92848,	27558,	'mya',	'n',	NULL,	'luk ဒန်',	NULL,	'2025-10-27 10:02:05',	7),
-(92849,	27558,	'eng',	'n',	NULL,	'Luk Dan',	NULL,	'2025-10-27 10:02:05',	7),`;
+(92849,	27558,	'eng',	'n',	NULL,	'Luk Dan',	NULL,	'2025-10-27 10:02:05',	7)`;
  /* eslint-disable no-useless-escape */

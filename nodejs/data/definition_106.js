@@ -598,5 +598,5 @@ export const DB_DATA_DEFINITION_106 = `INSERT INTO Definition (id, word_id, lang
 (83537,	2445,	'tha',	'n',	NULL,	'นกพิราบสีเขียว',	NULL,	'2025-10-27 00:03:37',	7),
 (83538,	12159,	'eng',	'n',	NULL,	'The occasion of the 60th anniversary. Diamond Jubilee. (diamond jubilee)',	NULL,	'2025-10-27 00:03:45',	7),
 (83539,	12159,	'tha',	'n',	NULL,	'เนื่องในโอกาสครบรอบ 60 ปี ไดมอนด์ จูบิลี่. (เพชร จูบิลี่)',	NULL,	'2025-10-27 00:03:45',	7),
-(83540,	6194,	'eng',	'v',	NULL,	'broken and scattered.',	NULL,	'2025-10-27 00:03:46',	7),`;
+(83540,	6194,	'eng',	'v',	NULL,	'broken and scattered.',	NULL,	'2025-10-27 00:03:46',	7)`;
  /* eslint-disable no-useless-escape */

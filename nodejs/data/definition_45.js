@@ -598,5 +598,5 @@ export const DB_DATA_DEFINITION_45 = `INSERT INTO Definition (id, word_id, lang_
 (43251,	4779,	'tha',	'v',	NULL,	'ซึมออก เช่น  น้ำซึม',	NULL,	'2025-10-26 08:01:09',	2),
 (43252,	27576,	'tha',	'n',	NULL,	'ชีวิต',	NULL,	'2025-10-26 08:01:09',	2),
 (43253,	27577,	'tha',	'n',	NULL,	'ชีวิต',	NULL,	'2025-10-26 08:01:09',	2),
-(43254,	27578,	'tha',	'n',	NULL,	'เทียน',	NULL,	'2025-10-26 08:01:09',	2),`;
+(43254,	27578,	'tha',	'n',	NULL,	'เทียน',	NULL,	'2025-10-26 08:01:09',	2)`;
  /* eslint-disable no-useless-escape */

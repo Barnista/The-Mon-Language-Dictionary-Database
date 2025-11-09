@@ -599,5 +599,5 @@ export const DB_DATA_DEFINITION_75 = `INSERT INTO Definition (id, word_id, lang_
 (66634,	5474,	'tha',	'n',	NULL,	'ความรับผิดชอบ.',	NULL,	'2025-10-26 15:19:36',	7),
 (66635,	5474,	'eng',	'n',	NULL,	'Responsibility.',	NULL,	'2025-10-26 15:19:36',	7),
 (66636,	789,	'tha',	'v',	NULL,	'1. ได้รับอนุญาต',	'၂။ အခွင့်အရေးယူသည်။',	'2025-10-26 15:19:46',	7),
-(66637,	789,	'eng',	'v',	NULL,	'1. Get permission.',	'၂။ အခွင့်အရေးယူသည်။',	'2025-10-26 15:19:46',	7),`;
+(66637,	789,	'eng',	'v',	NULL,	'1. Get permission.',	'၂။ အခွင့်အရေးယူသည်။',	'2025-10-26 15:19:46',	7)`;
  /* eslint-disable no-useless-escape */

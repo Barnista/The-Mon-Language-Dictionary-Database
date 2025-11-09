@@ -599,5 +599,5 @@ export const DB_DATA_DEFINITION_65 = `INSERT INTO Definition (id, word_id, lang_
 (60898,	304,	'eng',	'n',	NULL,	'1. Zinc for water supply Something made of bamboo etc. Drainage.',	'ကရံက်သ္ၚိ = အိမ်အမိုးရေတံလျှောက်။',	'2025-10-26 12:48:54',	7),
 (60899,	304,	'tha',	'n',	NULL,	'3. เกี่ยวกับใบมีด ฯลฯ แนวนอน พูดว่า. ความยืดหยุ่น',	NULL,	'2025-10-26 12:48:54',	7),
 (60900,	5071,	'eng',	'n',	NULL,	'Congee.',	NULL,	'2025-10-26 12:49:03',	7),
-(60901,	5071,	'eng',	'n',	NULL,	'boiled rice water',	NULL,	'2025-10-26 12:49:03',	7),`;
+(60901,	5071,	'eng',	'n',	NULL,	'boiled rice water',	NULL,	'2025-10-26 12:49:03',	7)`;
  /* eslint-disable no-useless-escape */

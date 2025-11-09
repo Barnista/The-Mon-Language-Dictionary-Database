@@ -599,5 +599,5 @@ export const DB_DATA_DEFINITION_85 = `INSERT INTO Definition (id, word_id, lang_
 (72378,	5305,	'eng',	'n',	NULL,	'Yesterday was a fast day. The other day.',	NULL,	'2025-10-26 18:21:04',	7),
 (72379,	5305,	'mya',	'n',	NULL,	'မနေ့ကအစာရှောင်ခြင်းနေ့ဖြစ်ခဲ့သည်။ အခြားနေ့က။',	NULL,	'2025-10-26 18:21:04',	7),
 (72380,	5306,	'eng',	'v',	NULL,	'Lie. Leave behind.',	'‘တနိက်’ ရှု။',	'2025-10-26 18:21:18',	7),
-(72381,	5306,	'mya',	'v',	NULL,	'မုသား။ ထားခဲ့ပါ။',	'‘တနိက်’ ရှု။',	'2025-10-26 18:21:18',	7),`;
+(72381,	5306,	'mya',	'v',	NULL,	'မုသား။ ထားခဲ့ပါ။',	'‘တနိက်’ ရှု။',	'2025-10-26 18:21:18',	7)`;
  /* eslint-disable no-useless-escape */

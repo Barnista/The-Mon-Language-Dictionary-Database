@@ -599,5 +599,5 @@ export const DB_DATA_DEFINITION_109 = `INSERT INTO Definition (id, word_id, lang
 (85337,	2741,	'tha',	'n',	NULL,	'ใยไผ่ออกมาจากผ้าอ้อมสำเร็จรูป อ่านเลย',	NULL,	'2025-10-27 01:36:08',	7),
 (85338,	12436,	'mya',	'v',	NULL,	'သဘောတူလက်ခံ',	NULL,	'2025-10-27 01:36:29',	7),
 (85339,	12436,	'mya',	'v',	NULL,	'(လူများ) အတွက်ရေတွက်',	NULL,	'2025-10-27 01:36:29',	7),
-(85340,	12436,	'eng',	'v',	NULL,	'count in (people)',	NULL,	'2025-10-27 01:36:29',	7),`;
+(85340,	12436,	'eng',	'v',	NULL,	'count in (people)',	NULL,	'2025-10-27 01:36:29',	7)`;
  /* eslint-disable no-useless-escape */

@@ -598,5 +598,5 @@ export const DB_DATA_DEFINITION_100 = `INSERT INTO Definition (id, word_id, lang
 (80299,	5863,	'tha',	'n',	NULL,	'วันสะบาโต',	NULL,	'2025-10-26 22:23:11',	7),
 (80300,	5863,	'eng',	'n',	NULL,	'Sabbath.',	NULL,	'2025-10-26 22:23:11',	7),
 (80301,	2151,	'tha',	'n',	NULL,	'(วา) ฝ่ามือ. (อุปกรณ์)',	'ခဍေဝ်ကဵုခဍာပ် = စည်းနှင့်ဝါး။',	'2025-10-26 22:23:21',	7),
-(80302,	2151,	'eng',	'n',	NULL,	'(Wa) palm. (instrument)',	'ခဍေဝ်ကဵုခဍာပ် = စည်းနှင့်ဝါး။',	'2025-10-26 22:23:21',	7),`;
+(80302,	2151,	'eng',	'n',	NULL,	'(Wa) palm. (instrument)',	'ခဍေဝ်ကဵုခဍာပ် = စည်းနှင့်ဝါး။',	'2025-10-26 22:23:21',	7)`;
  /* eslint-disable no-useless-escape */

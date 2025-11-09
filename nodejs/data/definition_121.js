@@ -599,5 +599,5 @@ export const DB_DATA_DEFINITION_121 = `INSERT INTO Definition (id, word_id, lang
 (91960,	13759,	'eng',	'n',	NULL,	'The story. The word prepared in advance.',	'“သ္ကေံပါရာဇိကဏ်။” =“ပါရာဇိကဏ်စကားပြင်။”',	'2025-10-27 08:59:30',	7),
 (91961,	27375,	'eng',	'v',	NULL,	'Done. Complete.',	NULL,	'2025-10-27 08:59:35',	7),
 (91962,	27375,	'eng',	'v',	NULL,	'exquisite',	NULL,	'2025-10-27 08:59:35',	7),
-(91963,	27375,	'mya',	'v',	NULL,	'ပြီးပြီ ပြည့်စုံ။',	NULL,	'2025-10-27 08:59:35',	7),`;
+(91963,	27375,	'mya',	'v',	NULL,	'ပြီးပြီ ပြည့်စုံ။',	NULL,	'2025-10-27 08:59:35',	7)`;
  /* eslint-disable no-useless-escape */

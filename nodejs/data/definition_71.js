@@ -599,5 +599,5 @@ export const DB_DATA_DEFINITION_71 = `INSERT INTO Definition (id, word_id, lang_
 (64452,	15327,	'eng',	'n',	NULL,	'Corn. Corn. (Pali - Varaka)',	NULL,	'2025-10-26 14:20:22',	7),
 (64453,	10323,	'eng',	'v',	NULL,	'eat',	NULL,	'2025-10-26 14:20:33',	7),
 (64454,	10323,	'tha',	'n',	NULL,	'สดใสเกินไป',	NULL,	'2025-10-26 14:20:33',	7),
-(64455,	10323,	'eng',	'v',	NULL,	'addicted',	NULL,	'2025-10-26 14:20:33',	7),`;
+(64455,	10323,	'eng',	'v',	NULL,	'addicted',	NULL,	'2025-10-26 14:20:33',	7)`;
  /* eslint-disable no-useless-escape */

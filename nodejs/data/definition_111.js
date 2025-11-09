@@ -598,5 +598,5 @@ export const DB_DATA_DEFINITION_111 = `INSERT INTO Definition (id, word_id, lang
 (86450,	12735,	'eng',	'n',	NULL,	'Part. side.',	'‘လွး’ ရှု။',	'2025-10-27 03:20:21',	7),
 (86451,	12735,	'eng',	'n',	NULL,	'one half',	NULL,	'2025-10-27 03:20:21',	7),
 (86452,	12735,	'tha',	'n',	NULL,	'ส่วนหนึ่ง. ด้านข้าง.',	'‘လွး’ ရှု။',	'2025-10-27 03:20:21',	7),
-(86453,	18291,	'eng',	'n',	NULL,	'Zodiac horoscope',	NULL,	'2025-10-27 03:20:24',	7),`;
+(86453,	18291,	'eng',	'n',	NULL,	'Zodiac horoscope',	NULL,	'2025-10-27 03:20:24',	7)`;
  /* eslint-disable no-useless-escape */

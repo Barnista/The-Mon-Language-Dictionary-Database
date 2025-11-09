@@ -206,6 +206,10 @@ def build_sql_js(sql):
             value = sql_command + '\n'
             value = value + "\n".join(pt)
 
+            #if the last char of this value is "," then remove it
+            if value.strip().endswith(','):
+                value = value.rstrip().rstrip(',')
+
             # ensure unique filename
             count = table_counts.get(name, 0) + 1
             table_counts[name] = count

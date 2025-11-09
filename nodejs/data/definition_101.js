@@ -599,5 +599,5 @@ export const DB_DATA_DEFINITION_101 = `INSERT INTO Definition (id, word_id, lang
 (80899,	11892,	'eng',	'adv',	NULL,	'temporary',	NULL,	'2025-10-26 22:40:10',	7),
 (80900,	11892,	'mya',	'adv',	NULL,	'ခေတ္တဖြစ်သော',	NULL,	'2025-10-26 22:40:10',	7),
 (80901,	11892,	'mya',	'adv',	NULL,	'အရပျထဲက',	NULL,	'2025-10-26 22:40:10',	7),
-(80902,	11892,	'eng',	'pali',	NULL,	'(Navi) Temporary. which is only temporary.',	NULL,	'2025-10-26 22:40:10',	7),`;
+(80902,	11892,	'eng',	'pali',	NULL,	'(Navi) Temporary. which is only temporary.',	NULL,	'2025-10-26 22:40:10',	7)`;
  /* eslint-disable no-useless-escape */

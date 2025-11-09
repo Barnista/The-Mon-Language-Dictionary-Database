@@ -599,5 +599,5 @@ export const DB_DATA_DEFINITION_63 = `INSERT INTO Definition (id, word_id, lang_
 (59698,	102,	'tha',	'v',	NULL,	'(ไข่และไข่เป็ดไม่ฟัก) เน่าเสีย',	'“ခၟာဲစာၚ်က္ဍိုၚ်အာရ။” = “ကြက်ဥ သားမပေါက်ပဲ ပုပ်သွားပြီ။”',	'2025-10-26 11:49:51',	7),
 (59699,	102,	'eng',	'v',	NULL,	'(Eggs and duck eggs don’t hatch) Rotten.',	'“ခၟာဲစာၚ်က္ဍိုၚ်အာရ။” = “ကြက်ဥ သားမပေါက်ပဲ ပုပ်သွားပြီ။”',	'2025-10-26 11:49:51',	7),
 (59700,	103,	'tha',	'n',	NULL,	'ร่มสีขาว (รวมอยู่ในเครื่องราชทั้งห้า)',	NULL,	'2025-10-26 11:50:10',	7),
-(59701,	103,	'eng',	'n',	NULL,	'The white umbrella (included in the five royal instruments)',	NULL,	'2025-10-26 11:50:10',	7),`;
+(59701,	103,	'eng',	'n',	NULL,	'The white umbrella (included in the five royal instruments)',	NULL,	'2025-10-26 11:50:10',	7)`;
  /* eslint-disable no-useless-escape */

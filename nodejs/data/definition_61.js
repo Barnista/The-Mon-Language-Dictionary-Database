@@ -599,5 +599,5 @@ export const DB_DATA_DEFINITION_61 = `INSERT INTO Definition (id, word_id, lang_
 (55686,	30409,	'tha',	'adv',	NULL,	'เล็ก',	NULL,	'2025-10-26 08:04:43',	2),
 (55687,	30409,	'tha',	'adv',	NULL,	'น้อย',	NULL,	'2025-10-26 08:04:43',	2),
 (55688,	30409,	'tha',	'v',	NULL,	'จีบ(พลู)',	NULL,	'2025-10-26 08:04:43',	2),
-(55689,	30409,	'tha',	'n',	NULL,	'จีบ เช่น သွတ်ဇဗၠု จีบพลู',	NULL,	'2025-10-26 08:04:44',	2),`;
+(55689,	30409,	'tha',	'n',	NULL,	'จีบ เช่น သွတ်ဇဗၠု จีบพลู',	NULL,	'2025-10-26 08:04:44',	2)`;
  /* eslint-disable no-useless-escape */

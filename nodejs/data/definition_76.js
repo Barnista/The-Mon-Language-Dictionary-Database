@@ -599,5 +599,5 @@ export const DB_DATA_DEFINITION_76 = `INSERT INTO Definition (id, word_id, lang_
 (67234,	15534,	'eng',	'n',	NULL,	'A kind of big bee. Bumblebee.',	NULL,	'2025-10-26 15:38:33',	7),
 (67235,	15534,	'mya',	'n',	NULL,	'နကျယ်ကောင်',	NULL,	'2025-10-26 15:38:33',	7),
 (67236,	5010,	'eng',	'n',	NULL,	'Opinion: A book that explains the mystery.',	'ပံက်ဋဳကာ = ပေါ်လွင်ထင်ရှားအောင် ပြောဆိုရေးသားသည်။ ဋီကာဖွင့်သည်။',	'2025-10-26 15:38:36',	7),
-(67237,	5010,	'tha',	'n',	NULL,	'ศาลฎีกา',	NULL,	'2025-10-26 15:38:36',	7),`;
+(67237,	5010,	'tha',	'n',	NULL,	'ศาลฎีกา',	NULL,	'2025-10-26 15:38:36',	7)`;
  /* eslint-disable no-useless-escape */
