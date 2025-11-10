@@ -8,9 +8,10 @@ import { DBEngine } from './src/engine.js';
 import { DBPayload } from './src/payload.js';
 
 export const MonDictDB = {
-    startDB: async () => {
-        //MonDictDB.testRun();
-        const engine = await DBEngine.init();
+    version: '1.3.1',
+    startDB: async (wasmFilePath) => {
+        //For client side web app, please us => `https://sql.js.org/dist/${file}`
+        const engine = await DBEngine.init(wasmFilePath);
         const db = DBEngine.createDB(
             engine,
             [

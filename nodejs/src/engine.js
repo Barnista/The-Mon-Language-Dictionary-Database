@@ -1,10 +1,10 @@
 import initSqlJs from 'sql.js';
 
 export const DBEngine = {
-    init: () => {
+    init: (wasmFilePath) => {
         return initSqlJs({
             //For client side web app, please us => `https://sql.js.org/dist/${file}`
-            locateFile: file => `wasm/${file}`
+            locateFile: file => `${wasmFilePath}${file}`
         })
     },
     testRun: (SqlJS) => {
