@@ -8,7 +8,8 @@ import { DBEngine } from './src/engine.js';
 import { DBPayload } from './src/payload.js';
 
 export const MonDictDB = {
-    version: '1.3.2',
+    version: '1.4.0',
+    wordCount: 26199,
     startDB: async (wasmFilePath) => {
         //For client side web app, please us => `https://sql.js.org/dist/${file}`
         const engine = await DBEngine.init(wasmFilePath);
@@ -36,9 +37,6 @@ export const MonDictDB = {
         //ASYNC LOAD CATEGORY DETAILS
         const resultCD = await payload.loadAsync('categorydetail');
         console.log('Category Details loaded:', resultCD, 'milisec');
-        //ASYNC LOAD WORDS
-        const resultW = await payload.loadAsync('word');
-        console.log('Words loaded:', resultW, 'milisec');
 
         return payload;
     },
@@ -100,11 +98,7 @@ export const MonDictDB = {
     },
     async count(payload) {
         if (this.isReady(payload)) {
-            const query = DB_QUERY_PRESET.SELECT_COUNT(DB_TABLE.Word);
-            const result = await payload.db.exec(query);
-            if (result[0]) {
-                return result[0].values[0][0];
-            }
+            return MonDictDB.wordCount;
         } else {
             return 0;
         }
@@ -112,9 +106,10 @@ export const MonDictDB = {
     //SEARCH WITH MON WORD
     async searchByWord(payload, word, isLimit, limit, isFirstCharOnly, lang_code, includeAuthorIds, orderBy) {
         if (this.isReady(payload.db) && word) {
-            //Check if certain Definitions are loaded by lang_code
-            const resultD = await payload.loadAsync(`definition${lang_code.toUpperCase()}`);
-            console.log('Definitions loaded:', resultD, 'milisec');
+
+            //Check if certain Words and Definitions are loaded by lang_code
+            const resultW = await DBPayload.loadFromWord(payload, word, lang_code);
+            console.log('Words & Definitions loaded:', resultW, 'milisec');
 
             //perform query
             const query = DB_QUERY_INSTANTS.SELECT_WORD_WITH_LIMIT(word, isLimit, limit, isFirstCharOnly, lang_code, includeAuthorIds, orderBy);
@@ -195,9 +190,9 @@ export const MonDictDB = {
     async searchByDefinition(payload, word, isLimit, limit, isFirstCharOnly, lang_code, includeAuthorIds, orderBy) {
         if (this.isReady(payload.db) && word) {
             //Check if certain Definitions are loaded by lang_code
-            const resultD = await payload.loadAsync(`definition${lang_code.toUpperCase()}`);
-            console.log('Definitions loaded:', resultD, 'milisec');
-            
+            const resultD = await DBPayload.loadFromDefinition(payload, lang_code);
+            console.log('Words & Definitions loaded:', resultD, 'milisec');
+
             //perform query
             const query = DB_QUERY_INSTANTS.SELECT_WORD_FROM_DEFINITION(word, isLimit, limit, isFirstCharOnly, lang_code, includeAuthorIds, orderBy);
             const result = await payload.db.exec(query);
