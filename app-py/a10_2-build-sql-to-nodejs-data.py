@@ -15,7 +15,9 @@ HERE = Path(__file__).parent.resolve()
 SRC_Author = (HERE / "../sql/Author.sql").resolve()
 SRC_Category = (HERE / "../sql/Category.sql").resolve()
 SRC_CategoryDetail = (HERE / "../sql/CategoryDetail.sql").resolve()
-SRC_Definition = (HERE / "../sql/Definition.sql").resolve()
+SRC_Definition_ENG = (HERE / "../sql/Definition_ENG.sql").resolve()
+SRC_Definition_THA = (HERE / "../sql/Definition_THA.sql").resolve()
+SRC_Definition_MYA = (HERE / "../sql/Definition_MYA.sql").resolve()
 SRC_Word = (HERE / "../sql/Word.sql").resolve()
 SRC_TABLES = (HERE / "../sql/sqlite_tables.sql").resolve()
 OUT_DIR = (HERE / "../nodejs/data").resolve()
@@ -162,7 +164,7 @@ def partition_lines(lines, size):
         # 1 part
     return parts
 
-def build_sql_js(sql):
+def build_sql_js(sql, tag=''):
     # Find all INSERT ... ; sequences (non-greedy, DOTALL to span lines)
     pattern = re.compile(r'(INSERT\s+INTO\b.*?;)', re.IGNORECASE | re.DOTALL)
     matches = pattern.findall(sql)
@@ -216,10 +218,11 @@ def build_sql_js(sql):
             #filename = f"{idx:03d}_{name}"
             filename = f"{name}"
             if count > 0:
-                filename = f"{filename}_{count}"
+                filename = f"{filename}{tag}_{count}"
             filename = OUT_DIR / (filename + ".js")
 
-            js_content = f"/* eslint-disable no-useless-escape */ \nexport const DB_DATA_{name.upper()}_{count} = `" + value + "`;\n /* eslint-disable no-useless-escape */"
+            #js_content = f"/* eslint-disable no-useless-escape */ \nexport const DB_DATA_{name.upper()}_{count} = `" + value + "`;\n /* eslint-disable no-useless-escape */"
+            js_content = f"/* eslint-disable no-useless-escape */ \nexport default `" + value + "`;\n /* eslint-disable no-useless-escape */"
             filename.write_text(js_content, encoding="utf-8")
 
     print(f"Wrote {len(matches)} files to: {OUT_DIR}")
@@ -246,12 +249,26 @@ else:
     text = SRC_CategoryDetail.read_text(encoding="utf-8")
     build_sql_js(text)
 
-if not SRC_Definition.exists():
-    print(f"Source SQL file not found: {SRC_Definition}", file=sys.stderr)
+if not SRC_Definition_ENG.exists():
+    print(f"Source SQL file not found: {SRC_Definition_ENG}", file=sys.stderr)
     sys.exit(1)
 else:
-    text = SRC_Definition.read_text(encoding="utf-8")
-    build_sql_js(text)
+    text = SRC_Definition_ENG.read_text(encoding="utf-8")
+    build_sql_js(text, 'ENG')
+
+if not SRC_Definition_THA.exists():
+    print(f"Source SQL file not found: {SRC_Definition_THA}", file=sys.stderr)
+    sys.exit(1)
+else:
+    text = SRC_Definition_THA.read_text(encoding="utf-8")
+    build_sql_js(text, 'THA')
+
+if not SRC_Definition_MYA.exists():
+    print(f"Source SQL file not found: {SRC_Definition_MYA}", file=sys.stderr)
+    sys.exit(1)
+else:
+    text = SRC_Definition_MYA.read_text(encoding="utf-8")
+    build_sql_js(text, 'MYA')
 
 if not SRC_Word.exists():
     print(f"Source SQL file not found: {SRC_Word}", file=sys.stderr)
@@ -276,7 +293,8 @@ def build_table_js(sql):
         value = value.strip()
         
         # Write to single file
-        js_content = f"/* eslint-disable no-useless-escape */ export const DB_TABLES_{index+1} = `" + value + "`; /* eslint-disable no-useless-escape */"
+        #js_content = f"/* eslint-disable no-useless-escape */ export const DB_TABLES_{index+1} = `" + value + "`; /* eslint-disable no-useless-escape */"
+        js_content = f"/* eslint-disable no-useless-escape */ export default `" + value + "`; /* eslint-disable no-useless-escape */"
         table_file = OUT_DIR_TABLE / f"table_{index+1}.js"
         table_file.write_text(js_content, encoding="utf-8")
 

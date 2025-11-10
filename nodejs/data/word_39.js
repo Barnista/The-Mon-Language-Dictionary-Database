@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */ 
-export const DB_DATA_WORD_39 = `INSERT INTO Word (id, synonym_word_id, word, ipa, th, lang_code, created_at, author_id) VALUES
+export default `INSERT INTO Word (id, synonym_word_id, word, ipa, th, lang_code, created_at, author_id) VALUES
 (28257,	NULL,	'ထပ်ဒၠး',	'???',	'ทอบแตฺ.แลฺ.ฮ (og)',	'mnw',	'2025-10-26 08:01:52',	3),
 (28258,	NULL,	'ထပ်လံၚ်',	'???',	'ทอบลฺอง (og)',	'mnw',	'2025-10-26 08:01:52',	3),
 (28259,	NULL,	'ထမ္ဍိုၚ်',	'tʰa-mɛˑa-ɗɑːŋ',	'ทอมดิาง (og)',	'mnw',	'2025-10-26 08:01:52',	2),

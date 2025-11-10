@@ -180,3 +180,8 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 csv/~$mon-thai-dict-processed.xlsx
+
+
+
+# NodeJS
+node_modules/
