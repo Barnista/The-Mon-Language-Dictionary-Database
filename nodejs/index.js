@@ -8,7 +8,7 @@ import { DBEngine } from './src/engine.js';
 import { DBPayload } from './src/payload.js';
 
 export const MonDictDB = {
-    version: '1.3.1',
+    version: '1.3.2',
     startDB: async (wasmFilePath) => {
         //For client side web app, please us => `https://sql.js.org/dist/${file}`
         const engine = await DBEngine.init(wasmFilePath);
@@ -91,16 +91,17 @@ export const MonDictDB = {
                 return 'NaN';
         }
     },
-    isReady(db) {
-        if (!db) {
+    isReady(payload) {
+        if (!payload.db) {
             console.log('DB IS NOT READY');
+            return false
         }
-        return db
+        return true
     },
-    async count(db) {
-        if (this.isReady(db)) {
+    async count(payload) {
+        if (this.isReady(payload)) {
             const query = DB_QUERY_PRESET.SELECT_COUNT(DB_TABLE.Word);
-            const result = await db.exec(query);
+            const result = await payload.db.exec(query);
             if (result[0]) {
                 return result[0].values[0][0];
             }
